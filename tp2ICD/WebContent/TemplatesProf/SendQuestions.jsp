@@ -50,7 +50,7 @@
 		<div class="container d-flex align-items-center"
 			style="max-width: none;">
 			<div class="logo mr-auto">
-				<a href="index.php"><img src="images/logo2.png" alt=""
+				<a href="index.html"><img src="images/logo2.png" alt=""
 					class="img-fluid" style="max-height: 50px; border-radius: 6px;"></a>
 			</div>
 			<nav class="nav-menu d-none d-lg-block" style="float: right;">
