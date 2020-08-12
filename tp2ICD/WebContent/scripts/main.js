@@ -138,6 +138,167 @@ function validateStudentInfo() {
     return true;
 }
 
+
+//validação submissão das perguntas
+function validateQuestions() {
+	let childCount = document.getElementById("teste").childElementCount;
+    let question = document.getElementById("cb1-input");
+    let questionCount = document.getElementById("cb1-listbox").childElementCount;
+    let timer = document.getElementById("question-time");
+    let invalid = document.getElementById("invalid");
+    
+    let choosedTheme = false;
+    for (let i = 1; i < childCount+1; i++) {
+		let elemento = document.getElementById("d" + i);  
+		if(elemento.classList.contains("same-as-selected")){
+			document.getElementById("district-name2").value = elemento.textContent;
+			choosedTheme = true;
+			break;
+		}
+	}
+    if(choosedTheme === false){
+    	document.getElementById("district-name2").focus();
+        invalid.innerHTML = "You must choose a theme";
+        return false;
+    }
+    
+    
+	let choosedQuestion = false;
+	let elemList = document.getElementsByName("q-name");
+	for (let i = 0; i < elemList.length; i++) {
+		if (question.value === elemList[0].textContent) {
+			choosedQuestion = true;
+			break;
+		}
+
+	}
+    
+    if(choosedQuestion === false){
+    	question.focus();
+    	invalid.innerHTML = "You must have to introduce the whole question and the question must match with one of the opcions";
+    	return false;
+    }
+    
+    
+    
+    if(!isNumber(timer.value) || timer.value==="" || timer.value == null){
+    	timer.focus();
+    	invalid.innerHTML = "The time must be only numbers and it will be on seconds";
+    	return false;
+    }else if(parseInt(timer.value) > 300){
+    	timer.focus();
+    	invalid.innerHTML = "The time must be less than 300 seconds";
+    	return false;
+    }else if(parseInt(timer.value) < 20){
+    	timer.focus();
+    	invalid.innerHTML = "The time must be more than 20 seconds";
+    	return false;
+    }
+    
+    
+    let twoQuestsError = false;
+    let wroteSeparated = false;
+    let errorSeparated = false;
+    let indexesWrite = [];
+    for (let i = 1; i < 7; i++) {
+    	let elemento = document.getElementById("op" + i);
+    	if((i === 1 || i ===2) && (elemento.value === "" || elemento.value == null)){
+    		twoQuestsError = true;
+    		break;
+    	}
+    	else if(elemento.value === "" || elemento.value == null){
+    		wroteSeparated = true;
+    	}
+    	else if(wroteSeparated && (elemento.value !== "" || elemento.value != null)){
+    		errorSeparated = true;
+    		break;
+    	}else if(elemento.value !== "" && elemento.value != null){
+    		indexesWrite.push(i);
+    		elemento.setAttribute("value", elemento.value);
+    	}
+    }
+    
+    if(twoQuestsError === true){
+    	document.getElementById("op1").focus();
+    	invalid.innerHTML = "You must have to write at least two questions on A and B";
+    	return false;
+    }
+    
+    if(errorSeparated === true){
+    	document.getElementById("op1").focus();
+    	invalid.innerHTML = "You can't write questions with blank align, like write on A,B and D it must be C";
+    	return false;
+    }
+    
+    let oneChecked = false;
+    for (let i = 0; i < indexesWrite.length; i++) {
+    	switch(i+1){
+    		case 1:
+    			if(document.getElementById('op-a').checked){
+    				oneChecked = true;
+    			}
+    			break;
+    		case 2:
+    			if(document.getElementById('op-b').checked){
+    				oneChecked = true;
+    				
+    			}
+    			break;
+    		case 3:
+    			if(document.getElementById('op-c').checked){
+    				oneChecked = true;
+    			}
+    			break;
+    		case 4:
+    			if(document.getElementById('op-d').checked){
+    				oneChecked = true;
+    			}
+    			break;
+    		case 5:
+    			if(document.getElementById('op-e').checked){
+    				oneChecked = true;
+    			}
+    			break;
+    		case 6:
+    			if(document.getElementById('op-f').checked){
+    				oneChecked = true;
+    			}
+    			break;
+    	}
+    }
+    
+    if(oneChecked === false){
+    	document.getElementById('op-a').focus();
+    	invalid.innerHTML = "You must have at least one question selected as correct";
+    	return false;
+    }
+    
+    for (let i = 1; i < 7; i++) {
+    	document.getElementById("op" + i).disabled = false;
+    }
+    document.getElementById("op-a").disabled = false;
+    document.getElementById("op-b").disabled = false;
+    document.getElementById("op-c").disabled = false;
+    document.getElementById("op-d").disabled = false;
+    document.getElementById("op-e").disabled = false;
+    document.getElementById("op-f").disabled = false;
+    
+    
+    if(document.getElementById("all-students").style.backgroundColor == "rgb(125, 116, 108)"){
+    	document.getElementById("all-students").value = "picked";
+    	document.getElementById("all-students").type = "text";
+    }else{
+    	document.getElementById("random-student").value = "picked";
+    	document.getElementById("random-student").type = "text";
+    }
+ 
+    return true;
+}
+
+
+
+
+
 function validateEmail(email) {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());

@@ -21,7 +21,7 @@ public class XMLReadWrite {
 		Writer out = new StringWriter();
 		try {
 			Transformer tf = TransformerFactory.newInstance().newTransformer();
-			tf.setOutputProperty(OutputKeys.ENCODING, "ISO-8859-1"); // "UTF-8"
+			tf.setOutputProperty(OutputKeys.ENCODING, "ISO-8859-1"); // 
 			tf.setOutputProperty(OutputKeys.INDENT, "yes");
 			tf.transform(new DOMSource(xmlDoc), new StreamResult(out));
 		} catch (Exception e) {
@@ -42,4 +42,6 @@ public class XMLReadWrite {
 		}
 		return xmlDoc;
 	}
+	
+
 }

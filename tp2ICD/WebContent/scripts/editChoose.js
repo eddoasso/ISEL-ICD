@@ -1,6 +1,4 @@
 $('#all-students').click(function () {
-	$('#all-students').val("picked");
-	$('#random-student').val("none");
     $('#all-students').css('background-color', '#7D746C');
     $('#all-students').css('color', '#fff');
     $('#random-student').css('background-color', '#f7fbfe');
@@ -8,8 +6,6 @@ $('#all-students').click(function () {
 });
 
 $('#random-student').click(function () {
-	$('#random-student').val("picked");
-	$('#all-students').val("none");
 	$('#random-student').css('background-color', '#7D746C');
     $('#random-student').css('color', '#fff');
     $('#all-students').css('background-color', '#f7fbfe');
@@ -58,20 +54,12 @@ function selectorBasedOnQuestion(info) {
 		let params = separatedQuestion[i].split(",");
 		separatedInfo.push(params);
 	}
-	console.log(separatedQuestion);
-	console.log(separatedInfo);
 	for (let i = 1; i < childCount+1; i++) {
 		let elemento = document.getElementById("q" + i);
 		elemento.addEventListener("click", function(e) {
 			resetAllCheckedBox();
-			document.getElementById("question-time").value = separatedInfo[i-1][0]+" segundos";
+			document.getElementById("question-time").value = separatedInfo[i-1][0];
 			switch(separatedInfo[i-1].length-1){
-				case 2:
-					document.getElementById("op1").value = separatedInfo[i-1][1];
-					if(separatedInfo[i-1][2] === "certo"){
-						document.getElementById("op-a").checked = true;
-					}
-					break;
 				case 4:
 					document.getElementById("op1").value = separatedInfo[i-1][1];
 					document.getElementById("op2").value = separatedInfo[i-1][2];

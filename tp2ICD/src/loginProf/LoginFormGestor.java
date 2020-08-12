@@ -40,6 +40,12 @@ public class LoginFormGestor extends HttpServlet {
 						if (ServerData.getProfByName(user).getResponseReceived().equals("correto")) {
 							ServerData.getProfByName(user).resetResponseReceived();
 							session.setAttribute("username", user);
+							if(session.getAttribute("existingKey") != null) {
+								session.setAttribute("existingKey",null);
+							}
+							if(session.getAttribute("errorKey") != null) {
+								session.setAttribute("errorKey",null);
+							}
 							getServletContext().getRequestDispatcher("/TemplatesProf/CreateRoom.jsp").forward(request,
 									response);
 							break;
@@ -91,6 +97,15 @@ public class LoginFormGestor extends HttpServlet {
 		}
 		return false;
 	}
+	
+	public static boolean isANumer(String s) {
+		if (s != null) {
+			String regex = "^\\d+$";
+			return s.matches(regex);
+		}
+		return false;
+	}
+
 
 	private boolean checkUsername(String username) {
 		if (isAlphaNumeric(username) && username.length() > 3 && username.length() < 25) {
@@ -100,7 +115,7 @@ public class LoginFormGestor extends HttpServlet {
 	}
 
 	private boolean checkPassword(String password) {
-		if (isAlphaNumeric(password) && password.length() > 3 && password.length() < 25) {
+		if (isANumer(password) && password.length() > 3 && password.length() < 25) {
 			return true;
 		}
 		return false;

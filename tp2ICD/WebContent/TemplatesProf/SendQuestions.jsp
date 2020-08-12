@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="UTF-8"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>UnioN</title>
 <link rel="stylesheet" type="text/css" href="css/main.css" />
 <link rel="stylesheet" type="text/css" href="css/styleIndex.css" />
@@ -38,7 +38,7 @@
 <script src="scripts/comboBox/comboBox.js"></script>
 <script src="scripts/comboBox/listBox.js"></script>
 <script src="scripts/comboBox/listOpcions.js"></script>
-
+<script src="scripts/main.js"></script>
 
 </head>
 
@@ -73,21 +73,25 @@
 		<div class="container-login100"
 			style="background-image: url('images/bg-01.jpg');">
 			<div class="wrap-login100" style="width: 70%;">
-				<form action="../handleLoginData"
-					class="login100-form validate-form" method="POST"
-					onSubmit="return validateLogin()">
+				<form  class="login100-form validate-form" action="handleSendQuestion" method="POST" onSubmit="return validateQuestions()">
 
 					<span class="login100-form-title p-b-34 p-t-27"
-						style="padding-top: 0px; font-size: 45px;">Send Questions</span> <span
-						class="login100-form-title p-b-34 p-t-27" style="font-size: 25px;">Choose
-						Theme</span>
+						style="padding-top: 0px; font-size: 45px;">Send Questions</span>
+						<% if (session.getAttribute("submitQuest") != null) {  %>
+							<% if (session.getAttribute("submitQuest").equals("success")) {  %>
+								<span class="login100-form-title p-b-34 p-t-27" style="font-size: 32px;color: #89cff0">Question submited with success</span>
+							<% }else if(session.getAttribute("submitQuest").equals("failure")){%>
+								<span class="login100-form-title p-b-34 p-t-27" style="font-size: 32px;color: #ff6666">Question not submited with success</span>
+							<% }%>
+						<% }%>
+						<span class="login100-form-title p-b-34 p-t-27" style="font-size: 25px;">Choose Theme</span>
 
 					<div class="custom-select"
 						style="border-radius: 10px; margin-bottom: 60px;">
 						<select id="district-name">
 							<option value="0" selected="selected">Select theme:</option>
 							<% pageContext.getOut().write("" +(session.getAttribute("themesOpc")));%>
-						</select> <input class="select-selected" name="dist" id="district-name2"
+						</select> <input class="select-selected" name="district-name2" id="district-name2"
 							value="Select theme:"
 							style="background-color: #ececec; border-radius: 10px;" readonly>
 						<div class="select-items select-hide" id="teste">
@@ -99,7 +103,7 @@
 						<label for="cb1-input"
 							style="font-family: Poppins-Medium; color: #fff; font-size: 24px;">Question</label>
 						<div class="group">
-							<input id="cb1-input" class="cb_edit" type="text" role="combobox"
+							<input id="cb1-input" name="cb1-input" class="cb_edit" type="text" role="combobox"
 								aria-autocomplete="list" aria-expanded="false"
 								aria-controls="cb1-listbox"
 								style="border-radius: 10px; padding: 10px; height: 45px; width: 310px; font-size: 17px; background-color: #E0E0E0; color: #383838">
@@ -115,15 +119,15 @@
 					</div>
 
 
-					<div class="wrap-input100 validate-input" data-validate="Enter username" style="margin-top: 40px; width: 160px">
-						<input id="question-time" name="question-time" class="input100" type="text" placeholder="Question time" disabled />
+					<div class="wrap-input100 validate-input" data-validate="Enter username" style="margin-top: 40px; width: 21%">
+						<input id="question-time" name="question-time" class="input100" type="text" placeholder="Question time in seconds"/>
 						 <span class="focus-input100" data-placeholder="&#xf179;"></span>
 					</div>
 
 
 
 
-					<!-- OpÃ§Ãµes de resposta -->
+					<!-- Opções de resposta -->
 					<section style="padding: 40px 0;">
 					
 					
@@ -157,7 +161,7 @@
 									placeholder="Opcion 2" style="padding: 0px; margin-top: 20px;"
 									disabled />
 							</div>
-							<input type="checkbox" id="op-b" name="op-b" value="b"
+							<input type="checkbox" id="op-b" name="op-b" value="a"
 								style="margin-left: 10%;" disabled>
 						</div>
 
@@ -172,7 +176,7 @@
 									placeholder="Opcion 3" style="padding: 0px; margin-top: 20px;"
 									disabled />
 							</div>
-							<input type="checkbox" id="op-c" name="op-c" value="c"
+							<input type="checkbox" id="op-c" name="op-c" value="a"
 								style="margin-left: 10%;" disabled>
 						</div>
 
@@ -185,7 +189,7 @@
 									placeholder="Opcion 4" style="padding: 0px; margin-top: 20px;"
 									disabled />
 							</div>
-							<input type="checkbox" id="op-d" name="op-d" value="d"
+							<input type="checkbox" id="op-d" name="op-d" value="a"
 								style="margin-left: 10%;" disabled>
 						</div>
 
@@ -198,7 +202,7 @@
 									placeholder="Opcion 5" style="padding: 0px; margin-top: 20px;"
 									disabled />
 							</div>
-							<input type="checkbox" id="op-e" name="op-e" value="e"
+							<input type="checkbox" id="op-e" name="op-e" value="a"
 								style="margin-left: 10%;" disabled>
 						</div>
 
@@ -211,15 +215,15 @@
 									placeholder="Opcion 6" style="padding: 0px; margin-top: 20px;"
 									disabled />
 							</div>
-							<input type="checkbox" id="op-f" name="op-f" value="f"
+							<input type="checkbox" id="op-f" name="op-f" value="a"
 								style="margin-left: 10%;" disabled>
 						</div>
 					</section>
 
 
 					<div style="margin-bottom:40px;">
-						<button id="all-students" type="button" value="picked" class="btn btn-secondary" style="margin-left:5%;width:40%;background-color: #7D746C;height:40px;font-size:19px;">All students</button>
-						<button id="random-student" type="button" value="none" class="btn btn-secondary" style="margin-left:10%;width:40%;background-color: #f7fbfe;color:#111;height:40px;font-size:19px;">Random students</button>
+						<input id="all-students" name="all-students" type="button" value="All students" class="btn btn-secondary" style="margin-left:5%;width:40%;background-color: #7D746C;height:40px;font-size:19px;">
+						<input id="random-student" name="random-student" type="button" value="Random students" class="btn btn-secondary" style="margin-left:10%;width:40%;background-color: #f7fbfe;color:#111;height:40px;font-size:19px;">
 					</div>
 					
 					<div class="contact100-form-checkbox">

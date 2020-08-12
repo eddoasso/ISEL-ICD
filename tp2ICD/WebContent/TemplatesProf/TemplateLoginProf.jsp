@@ -60,7 +60,6 @@
 					<p id="invalid" class="invalid"
 						style="font-size: 16px; color: #e5e5e5; padding-top: 15px" />
 					<div class="text-center p-t-90">
-						
 						<a class="txt1" href="#"> Don't have an account? Sign up </a>
 					</div>
 				</form>

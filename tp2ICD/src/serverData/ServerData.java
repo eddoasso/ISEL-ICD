@@ -22,6 +22,8 @@ public class ServerData implements ServletContextListener {
 	private static Map<String, String> profsConnectedByRoom;// map de key = pass sala, arrayList alunos connectados
 
 	private static Document questionsDoc;
+	
+	private static Map<String,ArrayList<String>> questionsSubmited;//map onde tem key, pergunta submetida pelo prof
 
 	// Notification that the servlet context is about to be shut down.
 	@Override
@@ -37,7 +39,7 @@ public class ServerData implements ServletContextListener {
 		studentsConnectedByRoom = new HashMap<String, ArrayList<ClientServerAluno>>();
 		roomsCreated = new ArrayList<String>();
 		profsConnectedByRoom = new HashMap<String, String>();
-
+		questionsSubmited = new HashMap<String, ArrayList<String>>();
 	}
 
 	// guarda instancia do professor
@@ -125,6 +127,7 @@ public class ServerData implements ServletContextListener {
 		return false;
 	}
 
+	//vai buscar as perguntas ao outro servidor e guarda no atributo questionsDoc
 	public static void getQuestionsFromServer(String profName) {
 		for (int i = 0; i < profsConnected.size(); i++) {
 			if (profsConnected.get(i).getProfName().equals(profName)) {
@@ -148,6 +151,7 @@ public class ServerData implements ServletContextListener {
 		}
 	}
 	
+	//verifica se ja recebeu as perguntas
 	public static boolean checkReceivedQuestionsFromServer(String profName) {
 		if(questionsDoc != null) {//caso de ja estar guardado não faz pedido outra vez ao servidor
 			return true;
@@ -163,6 +167,33 @@ public class ServerData implements ServletContextListener {
 	
 	public static Document getDocumentQuestions() {
 		return questionsDoc;
+	}
+	
+	//retorna os numeros dos alunos connectados se n tiver retorna null
+	public static String[] getStudentsConnected(String key) {
+		ArrayList<ClientServerAluno> alunosWithKey = studentsConnectedByRoom.get(key);
+		if(alunosWithKey != null) {
+			String[] students = new String[alunosWithKey.size()];
+			for(int i = 0; i< alunosWithKey.size();i++) {
+				students[i] = alunosWithKey.get(i).getStudentNumber();
+			}
+			return students;
+		}
+		return null;
+	}
+	
+	public static void setQuestionOfProfWithKey(String key, String xmlQuestion) {
+		if (questionsSubmited.get(key) != null) {
+			ArrayList<String> questions = questionsSubmited.get(key);
+			questions.add(xmlQuestion);
+			questionsSubmited.put(key, questions);
+			System.out.println(questionsSubmited);
+		} else {
+			ArrayList<String> quest = new ArrayList<String>();
+			quest.add(xmlQuestion);
+			questionsSubmited.put(key, quest);
+			System.out.println(questionsSubmited);
+		}
 	}
 	
 }

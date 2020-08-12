@@ -39,7 +39,7 @@ public class ServiceRoom extends HttpServlet {
 		// dados corretos
 		else if (LoginFormGestor.isAlphaNumeric(key) && key.length() > 3 && key.length() < 26) {
 			if (!ServerData.checkExistingKey(key)) {// dados todos corretos
-				if (ServerData.checkReceivedQuestionsFromServer((String) session.getAttribute("username"))) {// TODO quando não recebe msn
+				if (ServerData.checkReceivedQuestionsFromServer((String) session.getAttribute("username"))) {
 					ServerData.setKeyOfRoom(key);
 					ServerData.storeTeacherWithKey((String) session.getAttribute("username"), key);
 					session.setAttribute("key", key);
@@ -48,12 +48,14 @@ public class ServiceRoom extends HttpServlet {
 					session.setAttribute("themesDiv", themes[1]);
 					session.setAttribute("questions", getQuestionsFromXML());
 					session.setAttribute("infoQuest", convertInfoToScript());
+					if(session.getAttribute("submitQuest") != null) {
+						session.setAttribute("submitQuest",null);
+					}
 					getServletContext().getRequestDispatcher("/TemplatesProf/SendQuestions.jsp").forward(request,
 							response);
 				}
 			// a pass introduzida foi feitapelo prof que a meteu	
 			} else if (ServerData.checkTeacherWithKey((String) session.getAttribute("username"), key)) {
-				// TODO quando nao recebe perguntas o else
 				if (ServerData.checkReceivedQuestionsFromServer((String) session.getAttribute("username"))) {
 					ServerData.setKeyOfRoom(key);
 					String[] themes = convertThemesToHTML();
@@ -61,6 +63,9 @@ public class ServiceRoom extends HttpServlet {
 					session.setAttribute("themesDiv", themes[1]);
 					session.setAttribute("questions", getQuestionsFromXML());
 					session.setAttribute("infoQuest", convertInfoToScript());
+					if(session.getAttribute("submitQuest") != null) {
+						session.setAttribute("submitQuest",null);
+					}
 					getServletContext().getRequestDispatcher("/TemplatesProf/SendQuestions.jsp").forward(request,response);
 				}
 			} else {// ja existe uma chave
@@ -82,7 +87,7 @@ public class ServiceRoom extends HttpServlet {
 		doGet(request, response);
 	}
 
-	private String[] getThemesFromXML() {
+	public static String[] getThemesFromXML() {
 		Document doc = ServerData.getDocumentQuestions();
 		NodeList category = (NodeList) doc.getElementsByTagName("categoria");
 
@@ -140,7 +145,7 @@ public class ServiceRoom extends HttpServlet {
 
 	// converte info para <li id="lb1-al" role="option" value="a">Alabama</li>
 	private String convertCategoryQuestionToHTML(String theme, String question, int index) {
-		return "<li id=\"q" + index + "\" role=\"option\" value=\"" + theme + "\">" + question + "</li>\n";
+		return "<li id=\"q" + index + "\" name=\"q-name\" role=\"option\" value=\"" + theme + "\">" + question + "</li>\n";
 	}
 	
 	//mensagem no formato tempo,pergunta1,pergunta2,pergunta3,opc1,opc2,opc3
