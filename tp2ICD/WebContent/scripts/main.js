@@ -333,6 +333,15 @@ function isDateFormat(inputtxt) {
     return inputtxt.match(letterNumber);
 }
 
+function checkIfPassWordMatch(){
+	let p1 = document.getElementById('password').value;
+	let p2 = document.getElementById('verify_password').value;
+	
+	
+	if(p1 !== p2){
+		alert("Passwords do not match");	
+	}
+}
 
 /*function validateRegister() {
     if (validateLogin() === true) {
