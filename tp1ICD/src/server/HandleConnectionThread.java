@@ -50,14 +50,14 @@ class HandleConnectionThread extends Thread {
 					
 					
 					/*if (inputLine.substring(0,10).equals(Expression.requestForQuestions)) {
-						if (data.getQuestions().length == 0) //quando não há pergunta envia empty
+						if (data.getQuestions().length == 0) //quando nï¿½o hï¿½ pergunta envia empty
 							out.println(Expression.questionSectionEmpty);
 						
 							
-						else {//existe informação
-							if (data.canAccessQuestion(inputLine)) //verifica pode aceder a informação
+						else {//existe informaï¿½ï¿½o
+							if (data.canAccessQuestion(inputLine)) //verifica pode aceder a informaï¿½ï¿½o
 								out.println(doc.questionXMLFormat(data.getQuestions()[data.indexOfQuest(inputLine)]));
-							else if(data.shouldIncreaseIndex(inputLine)) //caso n possa mas existam outras perguntas dá increase e volta a perguntar
+							else if(data.shouldIncreaseIndex(inputLine)) //caso n possa mas existam outras perguntas dï¿½ increase e volta a perguntar
 								out.println(Expression.increaseQuestionIndex);
 							
 							else
@@ -68,7 +68,7 @@ class HandleConnectionThread extends Thread {
 						data.addQuestion(inputLine);
 						
 					
-					else if (inputLine.substring(0,8).equals(Expression.notifyAlive))//mensagem avisar o server que está vido
+					else if (inputLine.substring(0,8).equals(Expression.notifyAlive))//mensagem avisar o server que estï¿½ vido
 						data.addStudent(data.processNotifyXML(inputLine));
 					
 					else if (inputLine.equals(Expression.requestForStudents)) //request para os alunos conetados
@@ -93,7 +93,7 @@ class HandleConnectionThread extends Thread {
 			}
 
 		} catch (IOException | InterruptedException e) {
-			System.err.println("erro na ligaçao " + connection + ": " + e.getMessage());
+			System.err.println("erro na ligaï¿½ao " + connection + ": " + e.getMessage());
 		}
 	}
 	

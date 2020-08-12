@@ -16,7 +16,6 @@ public class SerializeObjectsXML {
 	
 	public static boolean addUser(String username,  String password) {
 		try {
-			
 			final XMLDecoder decoder = new XMLDecoder(new FileInputStream(FILENAME));
 			@SuppressWarnings("unchecked")
 			final List<String> listFromFile = (List<String>) decoder.readObject();
