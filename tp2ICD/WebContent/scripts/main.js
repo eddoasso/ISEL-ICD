@@ -1,168 +1,168 @@
 function validateLogin() {
-    let username = document.getElementById("username");
-    let password = document.getElementById("password");
-    let invalid = document.getElementById("invalid");
+	let username = document.getElementById("username");
+	let password = document.getElementById("password");
+	let invalid = document.getElementById("invalid");
 
-    if (username.value === null || username.value === "") {
-        username.focus();
-        invalid.innerHTML = "Username can't be blank";
-        return false;
-    } else if (username.value.length < 4) {
-        username.focus();
-        invalid.innerHTML = "Username can't be have less than 4 characters";
-        return false;
-    } else if (username.value.length > 25) {
-        username.focus();
-        invalid.innerHTML = "Username can't have more than 25 characters";
-        return false;
-    } else if (!alphanumeric(username.value)) {
-        username.focus();
-        invalid.innerHTML = "Username can only contain numbers and letters";
-        return false;
-    } else if (password.value.length < 6 || password.value === "" || password.value === null) {
-        password.focus();
-        invalid.innerHTML = "Password must be at least 6 characters long";
-        return false;
-    } else if (password.value.length > 50) {
-        password.focus();
-        invalid.innerHTML = "Password can't have more than 50 characters";
-        return false;
-    } else if (!alphanumeric(password.value)) {
-        password.focus();
-        invalid.innerHTML = "Password can only contain numbers and letters";
-        return false;
-    }
-    return true;
+	if (username.value === null || username.value === "") {
+		username.focus();
+		invalid.innerHTML = "Username can't be blank";
+		return false;
+	} else if (username.value.length < 4) {
+		username.focus();
+		invalid.innerHTML = "Username can't be have less than 4 characters";
+		return false;
+	} else if (username.value.length > 25) {
+		username.focus();
+		invalid.innerHTML = "Username can't have more than 25 characters";
+		return false;
+	} else if (!alphanumeric(username.value)) {
+		username.focus();
+		invalid.innerHTML = "Username can only contain numbers and letters";
+		return false;
+	} else if (password.value.length < 6 || password.value === "" || password.value === null) {
+		password.focus();
+		invalid.innerHTML = "Password must be at least 6 characters long";
+		return false;
+	} else if (password.value.length > 50) {
+		password.focus();
+		invalid.innerHTML = "Password can't have more than 50 characters";
+		return false;
+	} else if (!alphanumeric(password.value)) {
+		password.focus();
+		invalid.innerHTML = "Password can only contain numbers and letters";
+		return false;
+	}
+	return true;
 }
 
 function validateKeyRoom() {
-    let key = document.getElementById("key");
-    let invalid = document.getElementById("invalid");
+	let key = document.getElementById("key");
+	let invalid = document.getElementById("invalid");
 
-    if (key.value === null || key.value === "") {
-        key.focus();
-        invalid.innerHTML = "Key can't be blank";
-        return false;
-    } else if (key.value.length < 4) {
-        key.focus();
-        invalid.innerHTML = "Key can't be have less than 4 characters";
-        return false;
-    } else if (key.value.length > 25) {
-        key.focus();
-        invalid.innerHTML = "Key can't have more than 25 characters";
-        return false;
-    } else if (!alphanumeric(key.value)) {
-        key.focus();
-        invalid.innerHTML = "Key can only contain numbers and letters";
-        return false;
-    }
-    
-    return true;
+	if (key.value === null || key.value === "") {
+		key.focus();
+		invalid.innerHTML = "Key can't be blank";
+		return false;
+	} else if (key.value.length < 4) {
+		key.focus();
+		invalid.innerHTML = "Key can't be have less than 4 characters";
+		return false;
+	} else if (key.value.length > 25) {
+		key.focus();
+		invalid.innerHTML = "Key can't have more than 25 characters";
+		return false;
+	} else if (!alphanumeric(key.value)) {
+		key.focus();
+		invalid.innerHTML = "Key can only contain numbers and letters";
+		return false;
+	}
+
+	return true;
 }
 
 function validateStudentInfo() {
-    let firstName = document.getElementById("firstname");
-    let lastName = document.getElementById("lastname");
-    let number = document.getElementById("number");
-    let birthday = document.getElementById("birthday");
-    let invalid = document.getElementById("invalid");
+	let firstName = document.getElementById("firstname");
+	let lastName = document.getElementById("lastname");
+	let number = document.getElementById("number");
+	let birthday = document.getElementById("birthday");
+	let invalid = document.getElementById("invalid");
 
-    if (firstName.value === null || firstName.value === "") {
-    	firstName.focus();
-        invalid.innerHTML = "First name can't be blank";
-        return false;
-    } else if (firstName.value.length < 2) {
-    	firstName.focus();
-        invalid.innerHTML = "First name must have at least 3 characters";
-        return false;
-    } else if (firstName.value.length > 50) {
-    	firstName.focus();
-        invalid.innerHTML = "First name can't have more than 50 characters";
-        return false;
-    } else if (!isLetter(firstName.value)) {
-    	firstName.focus();
-        invalid.innerHTML = "First name can only contain letters";
-        return false;
-    }
-    
-    
-    
-    else if (lastName.value === null || lastName.value === "") {
-    	lastName.focus();
-        invalid.innerHTML = "Last name can't be blank";
-        return false;
-    } else if (lastName.value.length < 2) {
-    	lastName.focus();
-        invalid.innerHTML = "Last name must have at least 2 characters";
-        return false;
-    } else if (lastName.value.length > 50) {
-    	lastName.focus();
-        invalid.innerHTML = "Last name can't have more than 50 characters";
-        return false;
-    } else if (!isLetter(lastName.value)) {
-    	lastName.focus();
-        invalid.innerHTML = "Last name can only contain letters";
-        return false;
-    } 
-    
-    
-    
-    else if (number.value === null || number.value === "") {
-    	number.focus();
-        invalid.innerHTML = "Number can't be blank";
-        return false;
-    } else if (!isNumber(number.value)) {
-    	number.focus();
-        invalid.innerHTML = "Student number must contain only numbers";
-        return false;
-    }else if (parseInt(number.value) < 1) {
-    	number.focus();
-        invalid.innerHTML = "Number must be higher than 0";
-        return false;
-    } else if (parseInt(number.value) > 80000) {
-    	number.focus();
-        invalid.innerHTML = "Number must be less than 80000";
-        return false;
-    } 
-    
-    else if (birthday.value === null || birthday.value === "") {
-    	birthday.focus();
-        invalid.innerHTML = "Birthday can't be blank";
-        return false;
-    } else if (!isDateFormat(birthday.value)) {
-    	birthday.focus();
-        invalid.innerHTML = "Birthday is not on correct form, example: 02/06/1997";
-        return false;
-    }
-    
-    return true;
+	if (firstName.value === null || firstName.value === "") {
+		firstName.focus();
+		invalid.innerHTML = "First name can't be blank";
+		return false;
+	} else if (firstName.value.length < 2) {
+		firstName.focus();
+		invalid.innerHTML = "First name must have at least 3 characters";
+		return false;
+	} else if (firstName.value.length > 50) {
+		firstName.focus();
+		invalid.innerHTML = "First name can't have more than 50 characters";
+		return false;
+	} else if (!isLetter(firstName.value)) {
+		firstName.focus();
+		invalid.innerHTML = "First name can only contain letters";
+		return false;
+	}
+
+
+
+	else if (lastName.value === null || lastName.value === "") {
+		lastName.focus();
+		invalid.innerHTML = "Last name can't be blank";
+		return false;
+	} else if (lastName.value.length < 2) {
+		lastName.focus();
+		invalid.innerHTML = "Last name must have at least 2 characters";
+		return false;
+	} else if (lastName.value.length > 50) {
+		lastName.focus();
+		invalid.innerHTML = "Last name can't have more than 50 characters";
+		return false;
+	} else if (!isLetter(lastName.value)) {
+		lastName.focus();
+		invalid.innerHTML = "Last name can only contain letters";
+		return false;
+	}
+
+
+
+	else if (number.value === null || number.value === "") {
+		number.focus();
+		invalid.innerHTML = "Number can't be blank";
+		return false;
+	} else if (!isNumber(number.value)) {
+		number.focus();
+		invalid.innerHTML = "Student number must contain only numbers";
+		return false;
+	} else if (parseInt(number.value) < 1) {
+		number.focus();
+		invalid.innerHTML = "Number must be higher than 0";
+		return false;
+	} else if (parseInt(number.value) > 80000) {
+		number.focus();
+		invalid.innerHTML = "Number must be less than 80000";
+		return false;
+	}
+
+	else if (birthday.value === null || birthday.value === "") {
+		birthday.focus();
+		invalid.innerHTML = "Birthday can't be blank";
+		return false;
+	} else if (!isDateFormat(birthday.value)) {
+		birthday.focus();
+		invalid.innerHTML = "Birthday is not on correct form, example: 02/06/1997";
+		return false;
+	}
+
+	return true;
 }
 
 
 //validação submissão das perguntas
 function validateQuestions() {
 	let childCount = document.getElementById("teste").childElementCount;
-    let question = document.getElementById("cb1-input");
-    let questionCount = document.getElementById("cb1-listbox").childElementCount;
-    let timer = document.getElementById("question-time");
-    let invalid = document.getElementById("invalid");
-    
-    let choosedTheme = false;
-    for (let i = 1; i < childCount+1; i++) {
-		let elemento = document.getElementById("d" + i);  
-		if(elemento.classList.contains("same-as-selected")){
+	let question = document.getElementById("cb1-input");
+	let questionCount = document.getElementById("cb1-listbox").childElementCount;
+	let timer = document.getElementById("question-time");
+	let invalid = document.getElementById("invalid");
+
+	let choosedTheme = false;
+	for (let i = 1; i < childCount + 1; i++) {
+		let elemento = document.getElementById("d" + i);
+		if (elemento.classList.contains("same-as-selected")) {
 			document.getElementById("district-name2").value = elemento.textContent;
 			choosedTheme = true;
 			break;
 		}
 	}
-    if(choosedTheme === false){
-    	document.getElementById("district-name2").focus();
-        invalid.innerHTML = "You must choose a theme";
-        return false;
-    }
-    
-    
+	if (choosedTheme === false) {
+		document.getElementById("district-name2").focus();
+		invalid.innerHTML = "You must choose a theme";
+		return false;
+	}
+
+
 	let choosedQuestion = false;
 	let elemList = document.getElementsByName("q-name");
 	for (let i = 0; i < elemList.length; i++) {
@@ -172,127 +172,124 @@ function validateQuestions() {
 		}
 
 	}
-    
-    if(choosedQuestion === false){
-    	question.focus();
-    	invalid.innerHTML = "You must have to introduce the whole question and the question must match with one of the opcions";
-    	return false;
-    }
-    
-    
-    
-    if(!isNumber(timer.value) || timer.value==="" || timer.value == null){
-    	timer.focus();
-    	invalid.innerHTML = "The time must be only numbers and it will be on seconds";
-    	return false;
-    }else if(parseInt(timer.value) > 300){
-    	timer.focus();
-    	invalid.innerHTML = "The time must be less than 300 seconds";
-    	return false;
-    }else if(parseInt(timer.value) < 20){
-    	timer.focus();
-    	invalid.innerHTML = "The time must be more than 20 seconds";
-    	return false;
-    }
-    
-    
-    let twoQuestsError = false;
-    let wroteSeparated = false;
-    let errorSeparated = false;
-    let indexesWrite = [];
-    for (let i = 1; i < 7; i++) {
-    	let elemento = document.getElementById("op" + i);
-    	if((i === 1 || i ===2) && (elemento.value === "" || elemento.value == null)){
-    		twoQuestsError = true;
-    		break;
-    	}
-    	else if(elemento.value === "" || elemento.value == null){
-    		wroteSeparated = true;
-    	}
-    	else if(wroteSeparated && (elemento.value !== "" || elemento.value != null)){
-    		errorSeparated = true;
-    		break;
-    	}else if(elemento.value !== "" && elemento.value != null){
-    		indexesWrite.push(i);
-    		elemento.setAttribute("value", elemento.value);
-    	}
-    }
-    
-    if(twoQuestsError === true){
-    	document.getElementById("op1").focus();
-    	invalid.innerHTML = "You must have to write at least two questions on A and B";
-    	return false;
-    }
-    
-    if(errorSeparated === true){
-    	document.getElementById("op1").focus();
-    	invalid.innerHTML = "You can't write questions with blank align, like write on A,B and D it must be C";
-    	return false;
-    }
-    
-    let oneChecked = false;
-    for (let i = 0; i < indexesWrite.length; i++) {
-    	switch(i+1){
-    		case 1:
-    			if(document.getElementById('op-a').checked){
-    				oneChecked = true;
-    			}
-    			break;
-    		case 2:
-    			if(document.getElementById('op-b').checked){
-    				oneChecked = true;
-    				
-    			}
-    			break;
-    		case 3:
-    			if(document.getElementById('op-c').checked){
-    				oneChecked = true;
-    			}
-    			break;
-    		case 4:
-    			if(document.getElementById('op-d').checked){
-    				oneChecked = true;
-    			}
-    			break;
-    		case 5:
-    			if(document.getElementById('op-e').checked){
-    				oneChecked = true;
-    			}
-    			break;
-    		case 6:
-    			if(document.getElementById('op-f').checked){
-    				oneChecked = true;
-    			}
-    			break;
-    	}
-    }
-    
-    if(oneChecked === false){
-    	document.getElementById('op-a').focus();
-    	invalid.innerHTML = "You must have at least one question selected as correct";
-    	return false;
-    }
-    
-    for (let i = 1; i < 7; i++) {
-    	document.getElementById("op" + i).disabled = false;
-    }
-    document.getElementById("op-a").disabled = false;
-    document.getElementById("op-b").disabled = false;
-    document.getElementById("op-c").disabled = false;
-    document.getElementById("op-d").disabled = false;
-    document.getElementById("op-e").disabled = false;
-    document.getElementById("op-f").disabled = false;
-    
-    
-    if(document.getElementById("all-students").style.backgroundColor == "rgb(125, 116, 108)"){
-    	document.getElementById("all-students").value = "picked";
-    	document.getElementById("all-students").type = "text";
-    }else{
-    	document.getElementById("random-student").value = "picked";
-    	document.getElementById("random-student").type = "text";
-    }
- 
-    return true;
+
+	if (choosedQuestion === false) {
+		question.focus();
+		invalid.innerHTML = "You must have to introduce the whole question and the question must match with one of the opcions";
+		return false;
+	}
+
+	if (!isNumber(timer.value) || timer.value === "" || timer.value === null) {
+		timer.focus();
+		invalid.innerHTML = "The time must be only numbers and it will be on seconds";
+		return false;
+	} else if (parseInt(timer.value) > 300) {
+		timer.focus();
+		invalid.innerHTML = "The time must be less than 300 seconds";
+		return false;
+	} else if (parseInt(timer.value) < 20) {
+		timer.focus();
+		invalid.innerHTML = "The time must be more than 20 seconds";
+		return false;
+	}
+
+
+	let twoQuestsError = false;
+	let wroteSeparated = false;
+	let errorSeparated = false;
+	let indexesWrite = [];
+	for (let i = 1; i < 7; i++) {
+		let elemento = document.getElementById("op" + i);
+		if ((i === 1 || i ===  2 && (elemento.value === "" || elemento.value == null)) {
+			twoQuestsError = true;
+			break;
+		} else if (elemento.value === "" || elemento.value === null) {
+			wroteSeparated = true;
+
+		} else if (wroteSeparated && (elemento.value !== "" || elemento.value != null)) {
+			errorSeparated = true;
+			break;
+		} else if (elemento.value !== "" && elemento.value != null) {
+			indexesWrite.push(i);
+			elemento.setAttribute("value", elemento.value);
+		}
+	}
+
+	if (twoQuestsError === true) {
+		document.getElementById("op1").focus();
+		invalid.innerHTML = "You must have to write at least two questions on A and B";
+		return false;
+	}
+
+	if (errorSeparated === true) {
+		document.getElementById("op1").focus();
+		invalid.innerHTML = "You can't write questions with blank align, like write on A,B and D it must be C";
+		return false;
+	}
+
+	let oneChecked = false;
+	for (let i = 0; i < indexesWrite.length; i++) {
+		switch (i + 1) {
+			case 1:
+				if (document.getElementById('op-a').checked) {
+					oneChecked = true;
+				}
+				break;
+			case 2:
+				if (document.getElementById('op-b').checked) {
+					oneChecked = true;
+
+				}
+				break;
+			case 3:
+				if (document.getElementById('op-c').checked) {
+					oneChecked = true;
+				}
+				break;
+			case 4:
+				if (document.getElementById('op-d').checked) {
+					oneChecked = true;
+				}
+				break;
+			case 5:
+				if (document.getElementById('op-e').checked) {
+					oneChecked = true;
+				}
+				break;
+			case 6:
+				if(document.getElementById('op-f').checked) {
+					oneChecked = true;
+				}
+				break;
+		}
+	}
+
+	if (oneChecked === false) {
+		document.getElementById('op-a').focus();
+		invalid.innerHTML = "You must have at least one question selected as correct";
+		return false;
+	}
+
+	for (let i = 1; i < 7; i++) {
+		document.getElementById("op" + i).disabled = false;
+	}
+	document.getElementById("op-a").disabled = false;
+	document.getElementById("op-b").disabled = false;
+	document.getElementById("op-c").disabled = false;
+	document.getElementById("op-d").disabled = false;
+	document.getElementById("op-e").disabled = false;
+	document.getElementById("op-f").disabled = false;
+
+
+	if (document.getElementById("all-students").style.backgroundColor == "rgb(125, 116, 108)") {
+		document.getElementById("all-students").value = "picked";
+		document.getElementById("all-students").type = "text";
+	} else {
+		document.getElementById("random-student").value = "picked";
+		document.getElementById("random-student").type = "text";
+	}
+
+	return true;
 }
 
 
@@ -300,46 +297,46 @@ function validateQuestions() {
 
 
 function validateEmail(email) {
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
+	const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	return re.test(String(email).toLowerCase());
 }
 
 function alphanumeric(inputtxt) {
-    let letterNumber = /^[0-9a-zA-Z]+$/;
-    return inputtxt.match(letterNumber);
+	let letterNumber = /^[0-9a-zA-Z]+$/;
+	return inputtxt.match(letterNumber);
 }
 
 function letterSpace(inputtxt) {
-    let letterNumber = /[^\u0000-\u00ff]/;/*/^[A-Za-z ]+$/;*/
-    return !inputtxt.match(letterNumber);
+	let letterNumber = /[^\u0000-\u00ff]/;/*/^[A-Za-z ]+$/;*/
+	return !inputtxt.match(letterNumber);
 }
 
 function validatorISO(str) {
-	  return !/[^\u0000-\u00ff]/g.test(str);
+	return !/[^\u0000-\u00ff]/g.test(str);
 }
 
 function isLetter(inputtxt) {
-    let letterNumber = /^[a-zA-Z]+$/;
-    return inputtxt.match(letterNumber);
+	let letterNumber = /^[a-zA-Z]+$/;
+	return inputtxt.match(letterNumber);
 }
 
 function isNumber(inputtxt) {
-    let letterNumber = /^\d+$/;
-    return inputtxt.match(letterNumber);
+	let letterNumber = /^\d+$/;
+	return inputtxt.match(letterNumber);
 }
 
 function isDateFormat(inputtxt) {
-    let letterNumber = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;
-    return inputtxt.match(letterNumber);
+	let letterNumber = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;
+	return inputtxt.match(letterNumber);
 }
 
-function checkIfPassWordMatch(){
+function checkIfPassWordMatch() {
 	let p1 = document.getElementById('password').value;
 	let p2 = document.getElementById('verify_password').value;
-	
-	
-	if(p1 !== p2){
-		alert("Passwords do not match");	
+	let invalid = document.getElementById("invalid");
+
+	if (p1 !== p2) {
+		invalid.innerHTML = "passwords do not match";
 	}
 }
 
@@ -463,7 +460,7 @@ function validateNewPassword() {
 }
 function validateContentUser() {
     let invalid = document.getElementById("invalid2");
-    
+
     let selected = false;
     for(let a = 1;a < document.getElementById("teste").childElementCount+1;a++){
         if(document.getElementById("d"+a).className === "same-as-selected"){
@@ -484,8 +481,8 @@ function validateEditUser() {
     let pass = document.getElementById("pass");
     let newVal = document.getElementById("new");
     let invalid = document.getElementById("invalid");
-    
-    
+
+
     let selected = false;
     for(let a = 1;a < document.getElementById("teste").childElementCount+1;a++){
         if(document.getElementById("d"+a).className === "same-as-selected"){
@@ -528,7 +525,7 @@ function validateEditUser() {
 
 function validateEditPriority() {
     let invalid = document.getElementById("invalid2");
-    
+
     let selected = false;
     for(let a = 1;a < document.getElementById("teste2").childElementCount+1;a++){
         if(document.getElementById("e"+a).className === "same-as-selected"){
@@ -544,7 +541,7 @@ function validateEditPriority() {
 
 function validateEditContentAdmin() {
     let invalid = document.getElementById("invalid3");
-    
+
     let selected = false;
     for(let a = 1;a < document.getElementById("teste3").childElementCount+1;a++){
         if(document.getElementById("f"+a).className === "same-as-selected"){
