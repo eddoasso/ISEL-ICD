@@ -27,11 +27,8 @@
 		<div class="container-login100"
 			style="background-image: url('../images/bg-01.jpg');">
 			<div class="wrap-login100">
-				<form action="../inserirNovoProf"
-					class="login100-form validate-form" method="POST">
-
-
-					<!-- onSubmit="return validateNewProf()"> -->
+				<form action="../handleNewProf" class="login100-form validate-form"
+					method="POST" onSubmit="return validateNewProf()">
 
 
 
@@ -43,15 +40,15 @@
 					<div class="wrap-input100 validate-input"
 						data-validate="Enter username">
 						<input id="username" name="username" class="input100" type="text"
-							placeholder="New Username" /> <span class="focus-input100"
-							data-placeholder="&#xf207;"></span>
+							placeholder="New Username" onkeyup="checkIfUserNameIsValid()" />
+						<span class="focus-input100" data-placeholder="&#xf207;"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input"
 						data-validate="Enter password">
 						<input id="password" name="password" class="input100"
 							type="password" placeholder="Password"
-							onchange="checkIfPasswordIsValid()" /> <span
+							onkeyup="checkIfPasswordIsValid()" /> <span
 							class="focus-input100" data-placeholder="&#xf191;"></span>
 					</div>
 
@@ -59,8 +56,8 @@
 						data-validate="Verify password">
 						<input id="verify_password" name="verify_password"
 							class="input100" type="password" placeholder="Confirm password"
-							onchange="checkIfPassWordMatch()" /> <span
-							class="focus-input100" data-placeholder="&#xf191;"></span>
+							onkeyup="checkIfPassWordMatch()" /> <span class="focus-input100"
+							data-placeholder="&#xf191;"></span>
 					</div>
 
 					<div class="container-login100-form-btn">
