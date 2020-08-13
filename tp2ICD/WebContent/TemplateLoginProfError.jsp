@@ -4,7 +4,7 @@
 <html lang="pt">
   <head>
     <title>UnioN</title>
-    <meta charset="UTF-8" />
+    <meta charset="ISO-8859-1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     
 	<link href="images/icons/favicon.png" rel="icon">
