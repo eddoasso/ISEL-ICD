@@ -301,8 +301,14 @@ function validateEmail(email) {
 }
 
 function alphanumeric(inputtxt) {
-	let letterNumber = /^[0-9a-zA-Z]+$/;
+	let letterNumber = /^[a-z0-9]+$/i; // /^[0-9a-zA-Z]+$/
 	return inputtxt.match(letterNumber);
+}
+
+function isAlphanumericOrSpace(inputtxt){
+	let re = /^[a-z0-9 ]+$/i;
+	return inputtxt.match(re);
+
 }
 
 function letterSpace(inputtxt) {
@@ -330,15 +336,31 @@ function isDateFormat(inputtxt) {
 }
 
 
+function checkIfUserNameIsValid() {
+	let invalid = document.getElementById("invalid");
+	let input = document.getElementById('username').value;
+
+	if (!isAlphanumericOrSpace(input) || !(input.length > 4 && input.length < 64)) {
+		invalid.innerHTML = "Nome apenas pode conter letras e numeros e tem de ter no minimo 4 letras";
+	} else {
+		invalid.innerHTML = "";
+	}
+}
+
 function checkIfPasswordIsValid() {
 	let reg = /^[A-Za-z]\w{7,15}$/;
 	let invalid = document.getElementById("invalid");
-
-	if (!document.getElementById('password').value.match(reg)) {
+	let input = document.getElementById('password').value;
+	if (input === "" || input === null) {
+		invalid.innerHTML = "Password cannot be empty";
+	}
+	else if (!input.match(reg)) {
 		invalid.innerHTML =
 			"Password must be between 7 to 16 characters and can only" +
 			" contain characters, numeric digits, underscores" +
 			" and the first character must be a letter.";
+	} else {
+		invalid.innerHTML = "";
 	}
 }
 
@@ -351,7 +373,14 @@ function checkIfPassWordMatch() {
 
 	if (p1 !== p2) {
 		invalid.innerHTML = "Passwords do not match";
+	} else {
+		invalid.innerHTML = "";
 	}
+}
+
+
+function validateNewProf() {
+	return checkIfUserNameIsValid() && checkIfPasswordIsValid() && checkIfPassWordMatch();
 }
 
 /*function validateRegister() {
