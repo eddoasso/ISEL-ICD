@@ -41,11 +41,6 @@ public class RegisterProf extends HttpServlet {
 					"Username, password or verify_password can not be blank");
 		}
 
-		// TODO validar pass e userName
-
-		// 1º voltar ao src, depois a tp2ICD, depois diretoria raiz do projeto.
-		// De seguida descer a arvore ate ao ficheiro user.xml
-
 		// criar um novo professor e armazenar no servidor
 		ClientServerProf prof = new ClientServerProf(userName);
 		ServerData.storeProfConnected(prof);
@@ -66,48 +61,4 @@ public class RegisterProf extends HttpServlet {
 		doGet(request, response);
 	}
 
-}
-
-class SocketHelper {
-	private final String profName;
-	private final String host;
-	private final int port;
-
-	private Socket socket;
-	private BufferedReader in = null;
-	private PrintWriter out = null;
-
-	public SocketHelper(String profName) {
-		host = ServerInfo.DEFAULT_HOSTNAME;// Maquina onde reside a aplicacao
-											// servidora
-		port = ServerInfo.DEFAULT_PORT; // Porto da aplicacao servidora
-		createSocket();
-
-		this.profName = profName;
-
-	}
-
-	private void createSocket() {
-		try {
-			socket = new Socket(host, port);
-
-			// Stream para escrita no socket
-			out = new PrintWriter(socket.getOutputStream(), true);
-
-			// Stream para leitura do socket
-			in = new BufferedReader(
-					new InputStreamReader(socket.getInputStream()));
-
-		} catch (IOException exception) {
-			exception.printStackTrace();
-		}
-	}
-	public boolean writeToServer(String msg) {
-		if (out != null) {
-			out.println();
-
-			return true;
-		}
-		return false;
-	}
 }
