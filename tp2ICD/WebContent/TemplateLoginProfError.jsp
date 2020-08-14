@@ -55,7 +55,7 @@
 				<h3 style="color:#cccccc;"> The username <%= session.getAttribute("usernameError") %> is not correct</h3>
 			<% }%>
             <div class="text-center p-t-90">
-              <a class="txt1" href="#">
+              <a class="txt1" href="TemplatesProf/TemplateCriarNovoProf.jsp">
                 Don't have an account?  Sign up
               </a>
             </div>
