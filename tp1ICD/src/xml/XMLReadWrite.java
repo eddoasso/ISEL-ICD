@@ -16,7 +16,7 @@ import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
 public class XMLReadWrite {
-	
+
 	public static final String documentToString(Document xmlDoc) {
 		Writer out = new StringWriter();
 		try {
@@ -30,18 +30,20 @@ public class XMLReadWrite {
 		}
 		return out.toString();
 	}
-	
+
 	public static final Document documentFromString(String strXML) {
 		Document xmlDoc = null;
 		try {
 			DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+
+			System.out.println("String strXML" + strXML);
 			xmlDoc = builder.parse(new InputSource(new StringReader(strXML)));
+
 		} catch (Exception e) {
 			System.err.println("Error: Unable to read XML from string!\n\t" + e);
 			e.printStackTrace();
 		}
 		return xmlDoc;
 	}
-	
 
 }
