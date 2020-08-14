@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="1.8.0_241" class="java.beans.XMLDecoder">
+<java version="11.0.6" class="java.beans.XMLDecoder">
  <object class="java.util.ArrayList">
   <void method="add">
    <string>deus</string>
@@ -30,6 +30,12 @@
   </void>
   <void method="add">
    <string>123456</string>
+  </void>
+  <void method="add">
+   <string>Joaozinho2</string>
+  </void>
+  <void method="add">
+   <string>Joaozinho2</string>
   </void>
  </object>
 </java>
