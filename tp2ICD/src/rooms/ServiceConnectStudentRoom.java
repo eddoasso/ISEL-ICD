@@ -20,7 +20,7 @@ public class ServiceConnectStudentRoom extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String key = request.getParameter("key");// vai buscar o name que está no input da JSP
+		String key = request.getParameter("key");// vai buscar o name que estï¿½ no input da JSP
 
 		HttpSession session = request.getSession(false);
 		if (session == null) {
@@ -34,11 +34,11 @@ public class ServiceConnectStudentRoom extends HttpServlet {
 						response);
 			} else {
 				session.setAttribute("errorKey", key);
-				getServletContext().getRequestDispatcher("/EnterRoomError.jsp").forward(request, response);
+				getServletContext().getRequestDispatcher("/ErrorPages/EnterRoomError.jsp").forward(request, response);
 			}
 		} else {
 			session.setAttribute("errorKey", key);
-			getServletContext().getRequestDispatcher("/EnterRoomError.jsp").forward(request, response);
+			getServletContext().getRequestDispatcher("/ErrorPages/EnterRoomError.jsp").forward(request, response);
 		}
 	}
 

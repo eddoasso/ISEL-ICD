@@ -2,26 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
-<head>
-<title>UnioN</title>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<!--===============================================================================================-->
-<link href="../images/icons/favicon.png" rel="icon">
-<link href="../images/icons/apple-touch-icon.png" rel="apple-touch-icon">
-<!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="../assets/vendor/bootstrap/css/bootstrap.min.css" />
-<!--alinha icons com texto-->
-<!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="../assets/fonts/iconic/css/material-design-iconic-font.min.css" />
-<!--icons-->
-<!--===============================================================================================-->
-<link rel="stylesheet" type="text/css" href="../css/main.css" />
-<!--===============================================================================================-->
-<script src="../scripts/main.js"></script>
-</head>
+<jsp:include page="../JSPIncludes/standardHead.jsp" />
 <body>
 	<div class="limiter">
 		<div class="container-login100"

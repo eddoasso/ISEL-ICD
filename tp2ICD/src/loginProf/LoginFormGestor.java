@@ -59,9 +59,8 @@ public class LoginFormGestor extends HttpServlet {
 						} else {
 							ServerData.removeProfConnectedByName(user);
 							session.setAttribute("usernameError", user);
-							getServletContext()
-									.getRequestDispatcher(
-											"/TemplateLoginProfError.jsp")
+							getServletContext().getRequestDispatcher(
+									"/ErrorPages/TemplateLoginProfError.jsp")
 									.forward(request, response);
 							break;
 						}
@@ -81,7 +80,8 @@ public class LoginFormGestor extends HttpServlet {
 
 			else
 				getServletContext()
-						.getRequestDispatcher("/TemplateLoginProfError.jsp")
+						.getRequestDispatcher(
+								"/ErrorPages/TemplateLoginProfError.jsp")
 						.forward(request, response);
 
 		}
