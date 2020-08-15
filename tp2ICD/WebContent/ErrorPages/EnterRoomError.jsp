@@ -2,11 +2,10 @@
 	pageEncoding="ISO-8859-1"%>
 <html lang="pt">
 <jsp:include page="../JSPIncludes/standardHead.jsp" />
-
 <body>
 	<div class="limiter">
 		<div class="container-login100"
-			style="background-image: url('images/bg-01.jpg');">
+			style="background-image: url('../images/bg-01.jpg');">
 			<div class="wrap-login100">
 				<form class="login100-form validate-form" action="handleAccessRoom"
 					method="POST" onSubmit="return validateKeyRoom()">

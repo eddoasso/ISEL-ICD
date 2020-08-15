@@ -7,7 +7,7 @@
 <body>
 	<div class="limiter">
 		<div class="container-login100"
-			style="background-image: url('images/bg-01.jpg');">
+			style="background-image: url('../images/bg-01.jpg');">
 
 			<div class="wrap-login100">
 				<form action="handleLoginData" class="login100-form validate-form"
