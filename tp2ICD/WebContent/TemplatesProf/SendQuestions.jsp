@@ -4,82 +4,42 @@
 <html>
 <jsp:include page="../JSPIncludes/standardHead.jsp" />
 <body>
-	<!-- ======= Header ======= -->
-	<header id="header"
-		class="fixed-top d-flex align-items-center head-edit"
-		style="background-color: #d8d8d8 !important; height: 60px;">
-		<div class="container d-flex align-items-center"
-			style="max-width: none;">
-			<div class="logo mr-auto">
-				<a href="index.html"><img src="images/logo2.png" alt=""
-					class="img-fluid" style="max-height: 50px; border-radius: 6px;"></a>
-			</div>
-			<nav class="nav-menu d-none d-lg-block" style="float: right;">
-				<ul>
-					<li class="active"><a href="#" style="font-size: 18px;"><%=session.getAttribute("username")%></a></li>
-					<li><a href="#" style="font-size: 18px;">Check Answers</a></li>
-					<!--<li class="drop-down log"><a href="#" style="font-size:18px;">Check Answers</a>
-						<ul>
-							<li><a>User</a></li>
-							<li><a>Add content</a></li>
-							<li><a>Contact Us</a></li>
-						</ul>
-					</li>-->
-				</ul>
-			</nav>
-		</div>
-	</header>
+
+	<jsp:include page="../JSPIncludes/headerWithUser.jsp"></jsp:include>
 
 	<div class="limiter">
 		<div class="container-login100"
-			style="background-image: url('images/bg-01.jpg');">
+			style="background-image: url('../images/bg-01.jpg');">
 			<div class="wrap-login100" style="width: 70%;">
 				<form class="login100-form validate-form"
 					action="handleSendQuestion" method="POST"
 					onSubmit="return validateQuestions()">
-
+					
+					
 					<span class="login100-form-title p-b-34 p-t-27"
 						style="padding-top: 0px; font-size: 45px;">Send Questions</span>
-					<%
-						if (session.getAttribute("submitQuest") != null) {
-					%>
-					<%
-						if (session.getAttribute("submitQuest").equals("success")) {
-					%>
-					<span class="login100-form-title p-b-34 p-t-27"
-						style="font-size: 32px; color: #89cff0">Question submited
-						with success</span>
-					<%
-						} else if (session.getAttribute("submitQuest").equals("failure")) {
-					%>
-					<span class="login100-form-title p-b-34 p-t-27"
-						style="font-size: 32px; color: #ff6666">Question not
-						submited with success</span>
-					<%
-						}
-					%>
-					<%
-						}
-					%>
-					<span class="login100-form-title p-b-34 p-t-27"
-						style="font-size: 25px;">Choose Theme</span>
+						<% if (session.getAttribute("submitQuest") != null) {  %>
+							<% if (session.getAttribute("submitQuest").equals("success")) {  %>
+								<span class="login100-form-title p-b-34 p-t-27" style="font-size: 32px;color: #89cff0">Question submited with success</span>
+							<% }else if(session.getAttribute("submitQuest").equals("failure")){%>
+								<span class="login100-form-title p-b-34 p-t-27" style="font-size: 32px;color: #ff6666">Question not submited with success</span>
+							<% }%>
+						<% }%>
+						<span class="login100-form-title p-b-34 p-t-27" style="font-size: 25px;">Choose Theme</span>
 
 					<div class="custom-select"
 						style="border-radius: 10px; margin-bottom: 60px;">
 						<select id="district-name">
 							<option value="0" selected="selected">Select theme:</option>
-							<%
-								pageContext.getOut().write("" + (session.getAttribute("themesOpc")));
-							%>
-						</select> <input class="select-selected" name="district-name2"
-							id="district-name2" value="Select theme:"
+							<% pageContext.getOut().write("" +(session.getAttribute("themesOpc")));%>
+						</select> <input class="select-selected" name="district-name2" id="district-name2"
+							value="Select theme:"
 							style="background-color: #ececec; border-radius: 10px;" readonly>
 						<div class="select-items select-hide" id="teste">
-							<%
-								pageContext.getOut().write("" + (session.getAttribute("themesDiv")));
-							%>
+							<% pageContext.getOut().write("" +(session.getAttribute("themesDiv")));%>
 						</div>
 					</div>
+
 
 					<div class="combobox combobox-list" style="position: relative;">
 						<label for="cb1-input"
@@ -260,8 +220,8 @@
 	</footer>
 
 	<a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
-	<script src="scripts/comboBox2/comboBox2.js"></script>
-	<script src="scripts/editChoose.js"></script>
+	<script src="../scripts/comboBox2/comboBox2.js"></script>
+	<script src="../scripts/editChoose.js"></script>
 
 	<script>
 		selectorDistrict();
