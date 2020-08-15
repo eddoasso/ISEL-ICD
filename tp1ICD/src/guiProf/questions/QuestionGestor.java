@@ -3,7 +3,6 @@ package guiProf.questions;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import java.io.IOException;
 import java.util.Random;
 
@@ -95,11 +94,11 @@ public class QuestionGestor {
 					} else {
 						if (data.getNumberStudentsConnected() > 0) {
 							ClienteProfessor.xmlProtocol = getXMLText(xml.getIdOfQuestionSelected(String.valueOf(panel.getTheme().getSelectedItem()),
-											String.valueOf(panel.getQuestion().getSelectedItem())),createRandomStudent());// chama função da um random
+											String.valueOf(panel.getQuestion().getSelectedItem())),createRandomStudent());// chama funï¿½ï¿½o da um random
 							System.out.println(ClienteProfessor.xmlProtocol);
 						}
 						else {
-							JOptionPane.showMessageDialog(panel, "Não existem alunos conectados, espere até se conectarem", "Algo correu mal", JOptionPane.WARNING_MESSAGE);
+							JOptionPane.showMessageDialog(panel, "Nï¿½o existem alunos conectados, espere atï¿½ se conectarem", "Algo correu mal", JOptionPane.WARNING_MESSAGE);
 						}
 					}
 
@@ -175,7 +174,7 @@ public class QuestionGestor {
 				correct++;
 			}
 		}
-		display = display + ", com " + count + " opções e " + correct + " resposta(s) correta(s).\n";
+		display = display + ", com " + count + " opï¿½ï¿½es e " + correct + " resposta(s) correta(s).\n";
 
 		answersString = answersString + display;
 
@@ -186,12 +185,12 @@ public class QuestionGestor {
 	public boolean checkWriteQuestion() {
 		boolean[] check = new boolean[4];
 
-		// verificar o tempo se é so caracteres e tem menos de 4 caracteres
+		// verificar o tempo se ï¿½ so caracteres e tem menos de 4 caracteres
 		String time = panel.getTime().getText().substring(3, panel.getTime().getText().length());
 		if (time.matches("([01]?[0-9]|2[0-3]):[0-5][0-9]"))
 			check[0] = true;
 
-		// verificar se meteram 3 opções
+		// verificar se meteram 3 opï¿½ï¿½es
 		int[] indexes = new int[6];
 		int count = 0;
 		for (int i = 0; i < 6; i++) {
@@ -262,35 +261,35 @@ public class QuestionGestor {
 		}
 	}
 
-	// função que constroi a String para mostrar o que falta
+	// funï¿½ï¿½o que constroi a String para mostrar o que falta
 	public void errorMessage(int index, boolean alreadyInside) {
 		switch (index) {
 		case 0:
-			warningString = "-O tempo não possui apenas caracteres ou possui demasiado tempo\n";
+			warningString = "-O tempo nï¿½o possui apenas caracteres ou possui demasiado tempo\n";
 			break;
 		case 1:
 			if (!alreadyInside)
-				warningString = "-Não existem pelo menos 3 opções\n";
+				warningString = "-Nï¿½o existem pelo menos 3 opï¿½ï¿½es\n";
 			else
-				warningString = warningString + "-Não existem pelo menos 3 opções\n";
+				warningString = warningString + "-Nï¿½o existem pelo menos 3 opï¿½ï¿½es\n";
 			break;
 		case 2:
 			if (!alreadyInside)
-				warningString = "-Não existe nenhuma resposta ou a resposta não tem opção\n";
+				warningString = "-Nï¿½o existe nenhuma resposta ou a resposta nï¿½o tem opï¿½ï¿½o\n";
 			else
-				warningString = warningString + "-Não existe nenhuma resposta ou a resposta não tem opção\n";
+				warningString = warningString + "-Nï¿½o existe nenhuma resposta ou a resposta nï¿½o tem opï¿½ï¿½o\n";
 			break;
 		case 3:
 			if (!alreadyInside)
-				warningString = "-Não foi selecionado para quem será dirigada a pergunta\n";
+				warningString = "-Nï¿½o foi selecionado para quem serï¿½ dirigada a pergunta\n";
 			else
-				warningString = warningString + "-Não foi selecionado para quem será dirigada a pergunta\n";
+				warningString = warningString + "-Nï¿½o foi selecionado para quem serï¿½ dirigada a pergunta\n";
 			break;
 
 		}
 	}
 
-	//função seleciona um aluno aleatorio dos dentro da lista
+	//funï¿½ï¿½o seleciona um aluno aleatorio dos dentro da lista
 	private String createRandomStudent() {
 		Random rd = new Random();
 		int indexRd = rd.nextInt(data.getNumberStudentsConnected());

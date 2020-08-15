@@ -15,10 +15,10 @@ import PathAndExpressions.Expression;
 import clienteAluno.ClienteAluno;
 import clienteAluno.DataDynamicAluno;
 import guiAluno.answersPanel.AnswersPanelGestor;
+import guiAluno.answersPanel.XMLRead;
 import guiAluno.dataPanel.AlunoPanelGestor;
 import guiAluno.emptyPanel.EmptyPanel;
 import guiAluno.resultpanel.ResultGestor;
-import guiAluno.answersPanel.XMLRead;
 import xml.XMLReadWrite;
 
 public class AlunoGestor {
@@ -48,7 +48,7 @@ public class AlunoGestor {
 
 	}
 
-	// para quando se clica no X avisar o server que já não esta conectado
+	// para quando se clica no X avisar o server que jï¿½ nï¿½o esta conectado
 	private void onCloseText() {
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
@@ -107,7 +107,7 @@ public class AlunoGestor {
 		});
 	}
 
-	// listener para quando se clica no botão submeter
+	// listener para quando se clica no botï¿½o submeter
 	private void getSubmitContent(AnswersPanelGestor alunoPanel) {
 		alunoPanel.getButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -139,7 +139,7 @@ public class AlunoGestor {
 					Thread.sleep(300);
 					stateMachineSecond(changerStateInformation(resultOfRequest));
 					if (resultOfRequest.equals(Expression.goToResults))
-						JOptionPane.showMessageDialog(frame, "Ainda não existem novas questões", "Algo correu mal",
+						JOptionPane.showMessageDialog(frame, "Ainda nï¿½o existem novas questï¿½es", "Algo correu mal",
 								JOptionPane.WARNING_MESSAGE);
 
 				} catch (InterruptedException e1) {
@@ -175,7 +175,7 @@ public class AlunoGestor {
 		}
 	}
 
-	//state machine após receber 1 pergunta
+	//state machine apï¿½s receber 1 pergunta
 	private void stateMachineSecond(String state) {
 		switch (state) {
 		case Expression.questionSectionSomething:
@@ -199,7 +199,7 @@ public class AlunoGestor {
 		}
 	}
 
-	// função para perguntar por uma determinada pergunta pelo indice
+	// funï¿½ï¿½o para perguntar por uma determinada pergunta pelo indice
 	private void checkForUpdates() {
 		new Thread(new Runnable() {
 			@Override
@@ -228,14 +228,14 @@ public class AlunoGestor {
 
 	}
 
-	// função para avisar o servidor que está conectado
+	// funï¿½ï¿½o para avisar o servidor que estï¿½ conectado
 	private void notifyAlive() {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
 				for (;;) {
 					try {
-						ClienteAluno.xmlQuest = createNotifyXML(number);// notificar que o aluno com nºX esta vivo
+						ClienteAluno.xmlQuest = createNotifyXML(number);// notificar que o aluno com nï¿½X esta vivo
 						Thread.sleep(10000);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
@@ -293,7 +293,7 @@ public class AlunoGestor {
 
 	}
 
-	// função para pintar os resultados do aluno às perguntas
+	// funï¿½ï¿½o para pintar os resultados do aluno ï¿½s perguntas
 	public void setResultTextToBoard(String xml) {
 		Document doc = XMLReadWrite.documentFromString(xml);
 
@@ -303,7 +303,7 @@ public class AlunoGestor {
 			NodeList resposta = doc.getElementsByTagName("pergunta");
 			String st = "";
 			for (int i = 0; i < resposta.getLength(); i++) {
-				st = "Resposta à pergunta com id:" + doc.getElementsByTagName("pergunta").item(i).getAttributes()
+				st = "Resposta ï¿½ pergunta com id:" + doc.getElementsByTagName("pergunta").item(i).getAttributes()
 						.getNamedItem("id").getNodeValue();
 				if (resposta.item(i).hasChildNodes()) {
 					Element elemCat = (Element) resposta.item(i);
@@ -318,7 +318,7 @@ public class AlunoGestor {
 							st = st + "\n";
 					}
 				} else {
-					st = st + " Não respondeu\n";
+					st = st + " Nï¿½o respondeu\n";
 				}
 			}
 			result.setResultQuestions(st);
@@ -326,7 +326,7 @@ public class AlunoGestor {
 
 	}
 
-	// cria o XML para notificar o server que está vivo
+	// cria o XML para notificar o server que estï¿½ vivo
 	private String createNotifyXML(String number) {
 		String notify = Expression.notifyAlive;
 		notify = notify + "<aluno numero=\"" + number + "\"/>" + Expression.notifyAliveEnd;
@@ -352,7 +352,7 @@ public class AlunoGestor {
 		return st;
 	}
 
-	// verifica se os campos estão todos preenchidos
+	// verifica se os campos estï¿½o todos preenchidos
 	private boolean checkDataFromField(AlunoPanelGestor alunoPanel) {
 		boolean[] check = new boolean[3];
 
@@ -381,16 +381,16 @@ public class AlunoGestor {
 
 	}
 
-	// caso não esteja td envia a mensagem a dizer o que falta
+	// caso nï¿½o esteja td envia a mensagem a dizer o que falta
 	private void createString(boolean[] check) {
 		if (check[0] == false) {
-			warningString = "O nome não possui pelo menos 3 caracteres\n";
+			warningString = "O nome nï¿½o possui pelo menos 3 caracteres\n";
 		}
 		if (check[1] == false) {
-			warningString = warningString + "O número não possui apenas caracteres ou é superior a 50000\n";
+			warningString = warningString + "O nï¿½mero nï¿½o possui apenas caracteres ou ï¿½ superior a 50000\n";
 		}
 		if (check[2] == false) {
-			warningString = warningString + "A data não possui pelo menos 10 caracteres";
+			warningString = warningString + "A data nï¿½o possui pelo menos 10 caracteres";
 		}
 	}
 

@@ -5,11 +5,10 @@ import java.awt.Graphics;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import PathAndExpressions.Path;
-
-import javax.swing.JTextField;
 
 public class ProfPanel extends JPanel {
 

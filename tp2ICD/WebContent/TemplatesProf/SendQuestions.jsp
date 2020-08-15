@@ -23,10 +23,11 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous" />
-	
+
 <!-- j-Query -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <link rel="stylesheet" type="text/css"
 	href="assets/fonts/iconic/css/material-design-iconic-font.min.css" />
 
@@ -55,8 +56,8 @@
 			</div>
 			<nav class="nav-menu d-none d-lg-block" style="float: right;">
 				<ul>
-					<li class="active"><a href="#" style="font-size:18px;"><%= session.getAttribute("username") %></a></li>
-					<li><a href="#" style="font-size:18px;">Check Answers</a></li>
+					<li class="active"><a href="#" style="font-size: 18px;"><%=session.getAttribute("username")%></a></li>
+					<li><a href="#" style="font-size: 18px;">Check Answers</a></li>
 					<!--<li class="drop-down log"><a href="#" style="font-size:18px;">Check Answers</a>
 						<ul>
 							<li><a>User</a></li>
@@ -73,29 +74,50 @@
 		<div class="container-login100"
 			style="background-image: url('images/bg-01.jpg');">
 			<div class="wrap-login100" style="width: 70%;">
-				<form  class="login100-form validate-form" action="handleSendQuestion" method="POST" onSubmit="return validateQuestions()">
+				<form class="login100-form validate-form"
+					action="handleSendQuestion" method="POST"
+					onSubmit="return validateQuestions()">
 
 					<span class="login100-form-title p-b-34 p-t-27"
 						style="padding-top: 0px; font-size: 45px;">Send Questions</span>
-						<% if (session.getAttribute("submitQuest") != null) {  %>
-							<% if (session.getAttribute("submitQuest").equals("success")) {  %>
-								<span class="login100-form-title p-b-34 p-t-27" style="font-size: 32px;color: #89cff0">Question submited with success</span>
-							<% }else if(session.getAttribute("submitQuest").equals("failure")){%>
-								<span class="login100-form-title p-b-34 p-t-27" style="font-size: 32px;color: #ff6666">Question not submited with success</span>
-							<% }%>
-						<% }%>
-						<span class="login100-form-title p-b-34 p-t-27" style="font-size: 25px;">Choose Theme</span>
+					<%
+						if (session.getAttribute("submitQuest") != null) {
+					%>
+					<%
+						if (session.getAttribute("submitQuest").equals("success")) {
+					%>
+					<span class="login100-form-title p-b-34 p-t-27"
+						style="font-size: 32px; color: #89cff0">Question submited
+						with success</span>
+					<%
+						} else if (session.getAttribute("submitQuest").equals("failure")) {
+					%>
+					<span class="login100-form-title p-b-34 p-t-27"
+						style="font-size: 32px; color: #ff6666">Question not
+						submited with success</span>
+					<%
+						}
+					%>
+					<%
+						}
+					%>
+					<span class="login100-form-title p-b-34 p-t-27"
+						style="font-size: 25px;">Choose Theme</span>
 
 					<div class="custom-select"
 						style="border-radius: 10px; margin-bottom: 60px;">
 						<select id="district-name">
 							<option value="0" selected="selected">Select theme:</option>
-							<% pageContext.getOut().write("" +(session.getAttribute("themesOpc")));%>
-						</select> <input class="select-selected" name="district-name2" id="district-name2"
-							value="Select theme:"
+							<%
+								pageContext.getOut().write("" + (session.getAttribute("themesOpc")));
+							%>
+						</select> <input class="select-selected" name="district-name2"
+							id="district-name2" value="Select theme:"
 							style="background-color: #ececec; border-radius: 10px;" readonly>
 						<div class="select-items select-hide" id="teste">
-							<% pageContext.getOut().write("" +(session.getAttribute("themesDiv")));%>
+							<%
+								pageContext.getOut().write("" + (session.getAttribute("themesDiv")));
+							%>
 						</div>
 					</div>
 
@@ -103,9 +125,9 @@
 						<label for="cb1-input"
 							style="font-family: Poppins-Medium; color: #fff; font-size: 24px;">Question</label>
 						<div class="group">
-							<input id="cb1-input" name="cb1-input" class="cb_edit" type="text" role="combobox"
-								aria-autocomplete="list" aria-expanded="false"
-								aria-controls="cb1-listbox"
+							<input id="cb1-input" name="cb1-input" class="cb_edit"
+								type="text" role="combobox" aria-autocomplete="list"
+								aria-expanded="false" aria-controls="cb1-listbox"
 								style="border-radius: 10px; padding: 10px; height: 45px; width: 310px; font-size: 17px; background-color: #E0E0E0; color: #383838">
 							<button id="cb1-button" tabindex="-1" aria-label="Open"
 								type="button" class="btn-drop"
@@ -114,14 +136,19 @@
 
 						<ul id="cb1-listbox" role="listbox" aria-label="States"
 							style="position: absolute; top: 50px; left: 113px; border-radius: 10px; width: 330px; background-color: #E0E0E0;">
-							<% pageContext.getOut().write("" +(session.getAttribute("questions")));%>
+							<%
+								pageContext.getOut().write("" + (session.getAttribute("questions")));
+							%>
 						</ul>
 					</div>
 
 
-					<div class="wrap-input100 validate-input" data-validate="Enter username" style="margin-top: 40px; width: 21%">
-						<input id="question-time" name="question-time" class="input100" type="text" placeholder="Question time in seconds"/>
-						 <span class="focus-input100" data-placeholder="&#xf179;"></span>
+					<div class="wrap-input100 validate-input"
+						data-validate="Enter username"
+						style="margin-top: 40px; width: 21%">
+						<input id="question-time" name="question-time" class="input100"
+							type="text" placeholder="Question time in seconds" /> <span
+							class="focus-input100" data-placeholder="&#xf179;"></span>
 					</div>
 
 
@@ -129,16 +156,16 @@
 
 					<!-- Opções de resposta -->
 					<section style="padding: 40px 0;">
-					
-					
+
+
 						<div>
 							<label for="lab1"
 								style="font-family: Poppins-Medium; color: #fff; font-size: 24px;">Opcions</label>
 							<label for="check1"
 								style="font-family: Poppins-Medium; color: #fff; font-size: 24px; margin-left: 81%">Answers</label>
 						</div>
-						
-						
+
+
 
 						<div style="display: flex; align-items: center" id="lab1">
 							<label for="op1"
@@ -149,7 +176,8 @@
 									placeholder="Opcion 1" style="padding: 0px; margin-top: 20px;"
 									disabled />
 							</div>
-							<input type="checkbox" id="op-a" name="op-a" value="a" style="margin-left: 10%;" disabled>
+							<input type="checkbox" id="op-a" name="op-a" value="a"
+								style="margin-left: 10%;" disabled>
 						</div>
 
 						<div style="display: flex; align-items: center">
@@ -221,19 +249,25 @@
 					</section>
 
 
-					<div style="margin-bottom:40px;">
-						<input id="all-students" name="all-students" type="button" value="All students" class="btn btn-secondary" style="margin-left:5%;width:40%;background-color: #7D746C;height:40px;font-size:19px;">
-						<input id="random-student" name="random-student" type="button" value="Random students" class="btn btn-secondary" style="margin-left:10%;width:40%;background-color: #f7fbfe;color:#111;height:40px;font-size:19px;">
+					<div style="margin-bottom: 40px;">
+						<input id="all-students" name="all-students" type="button"
+							value="All students" class="btn btn-secondary"
+							style="margin-left: 5%; width: 40%; background-color: #7D746C; height: 40px; font-size: 19px;">
+						<input id="random-student" name="random-student" type="button"
+							value="Random students" class="btn btn-secondary"
+							style="margin-left: 10%; width: 40%; background-color: #f7fbfe; color: #111; height: 40px; font-size: 19px;">
 					</div>
-					
+
 					<div class="contact100-form-checkbox">
 						<input class="input-checkbox100" id="ckb1" type="checkbox"
 							name="remember-me" /> <label class="label-checkbox100"
 							for="ckb1">Edit question</label>
 					</div>
-					
-					<div style="margin-bottom:40px;">
-						<button id="reset-all" type="button" value="picked" class="btn btn-secondary" style="background-color: #6ab4da;font-size:19px;border-radius:10px;">Reset</button>
+
+					<div style="margin-bottom: 40px;">
+						<button id="reset-all" type="button" value="picked"
+							class="btn btn-secondary"
+							style="background-color: #6ab4da; font-size: 19px; border-radius: 10px;">Reset</button>
 					</div>
 
 					<div class="container-login100-form-btn">
@@ -245,8 +279,9 @@
 					</div>
 					<p id="invalid" class="invalid"
 						style="font-size: 16px; color: #e5e5e5; padding-top: 15px" />
-					<div class="text-center p-t-90" style="padding-top:30px;">
-						<a class="txt1" href="#" style="font-size:16px;"> Add question to server </a>
+					<div class="text-center p-t-90" style="padding-top: 30px;">
+						<a class="txt1" href="TemplateCriarPergunta.jsp"
+							style="font-size: 16px;"> Add question to server </a>
 					</div>
 				</form>
 			</div>
@@ -273,7 +308,9 @@
 		document.addEventListener("click", closeAllSelect);
 		resetAll();
 	</script>
-	<% pageContext.getOut().write("" +(session.getAttribute("infoQuest")));%>
+	<%
+		pageContext.getOut().write("" + (session.getAttribute("infoQuest")));
+	%>
 
 </body>
 
