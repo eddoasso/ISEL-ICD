@@ -13,9 +13,7 @@
 <!-- Favicons -->
 <link href="../images/icons/favicon.png" rel="icon" />
 <link href="../images/icons/apple-touch-icon.png" rel="apple-touch-icon" />
-<!-- Images -->
-<link href="../images/bg-01.jpg" rel="bg-01" />
-<link href="../images/logo2.png" />
+
 <!-- Google Fonts -->
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
