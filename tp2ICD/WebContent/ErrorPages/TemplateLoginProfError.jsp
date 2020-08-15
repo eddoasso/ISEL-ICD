@@ -4,7 +4,6 @@
 "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="pt">
 <jsp:include page="../JSPIncludes/standardHead.jsp" />
-
 <body>
 	<div class="limiter">
 		<div class="container-login100"
