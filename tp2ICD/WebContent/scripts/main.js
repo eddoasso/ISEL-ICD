@@ -383,6 +383,74 @@ function validateNewProf() {
 	return checkIfUserNameIsValid() && checkIfPasswordIsValid() && checkIfPassWordMatch();
 }
 
+
+function addMoreOptions() {
+	let optionsGroupElement = document.getElementById("optionsGroup");
+
+	let numberOfOption = optionsGroupElement.childElementCount + 1;
+
+	let nodeToAdd = document.createElement("div");
+	nodeToAdd.setAttribute("style", "display: flex; align-items: center");
+
+	let labelNode = document.createElement("label");
+	labelNode.setAttribute("for", "opc" + numberOfOption);
+	labelNode.setAttribute("style", "font-family: Poppins-Medium; color: #fff; font-size: 24px; padding-right: 96px;")
+	let textNode = document.createTextNode("Option " + numberOfOption)
+	labelNode.appendChild(textNode);
+
+	nodeToAdd.appendChild(labelNode);
+
+
+	let inputDiv = document.createElement("div");
+	inputDiv.setAttribute("class", "wrap-input100 validate-input");
+	inputDiv.setAttribute("style", "width: 50%;")
+
+	let inputNode = document.createElement("input");
+	inputNode.setAttribute("id", "opc" + numberOfOption);
+	inputNode.setAttribute("name", "opc" + numberOfOption);
+	inputNode.setAttribute("class", "input100");
+	inputNode.setAttribute("type", "text");
+	inputNode.setAttribute("style", "padding: 0px; margin-top: 20px; font-size: 20px;")
+
+	inputDiv.appendChild(inputNode);
+	nodeToAdd.appendChild(inputDiv);
+
+
+	optionsGroupElement.appendChild(nodeToAdd);
+}
+
+function removeOption() {
+
+	let elem = document.getElementById("optionsGroup");
+	if (elem.childElementCount > 2) {
+		elem.removeChild(elem.lastChild);
+	} else {
+		console.log("Numero minimo de filhos e 2");
+	}
+}
+function validateNewQuestion() {
+	let theme = document.getElementById("theme").value;
+	let question = document.getElementById("question").value;
+	if (!alphanumeric(theme) || theme.length > 32) {
+		return false
+	}
+	if (!alphanumeric(question) || question.length > 128) {
+		return false
+	}
+
+
+	let options = [];
+	let optionsGroup = document.getElementById("optionsGroup");
+	for (let i = 1; i <= optionsGroup.childElementCount; i++) {
+		options.push(document.getElementById("opc" + i).value);
+		if (!alphanumeric(options[i]) || options[i].length > 128) {
+			return false;
+		}
+	}
+	return true;
+}
+
+
 /*function validateRegister() {
     if (validateLogin() === true) {
         let invalid = document.getElementById("invalid");

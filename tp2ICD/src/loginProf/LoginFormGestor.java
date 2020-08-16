@@ -20,7 +20,7 @@ public class LoginFormGestor extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
-		String user = request.getParameter("username");// vai buscar o name que est� no input da JSP
+		String user = request.getParameter("username");// vai buscar o name que esta no input da JSP
 		String pass = request.getParameter("password");
 
 		boolean sessionCreated = false;

@@ -1,32 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <jsp:include page="../JSPIncludes/standardHead.jsp" />
 
 <body>
 	<div class="limiter">
-		<div class="container-login100"
-			style="background-image: url('../images/bg-01.jpg');">
+		<div class="container-login100" style="background-image: url('../images/bg-01.jpg');">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form" action="handleCreateRoom"
-					method="POST" onSubmit="return validateKeyRoom()">
-					<span class="login100-form-logo"> <i
-						class="zmdi zmdi-accounts-alt"></i></span> <span
-						class="login100-form-title p-b-34 p-t-27">Create password
-						for room</span>
+				<form class="login100-form validate-form" action="/handleCreateRoom" method="POST" onSubmit="return validateKeyRoom()">
+					<span class="login100-form-logo"> <i class="zmdi zmdi-accounts-alt"></i></span> <span class="login100-form-title p-b-34 p-t-27">Create password for room</span>
 
-					<div class="wrap-input100 validate-input"
-						data-validate="Enter password">
-						<input id="key" name="key" class="input100" type="password"
-							placeholder="Key Password" /> <span class="focus-input100"
-							data-placeholder="&#xf183;"></span>
+					<div class="wrap-input100 validate-input" data-validate="Enter password">
+						<input id="key" name="key" class="input100" type="password" placeholder="Key Password" /> <span class="focus-input100" data-placeholder="&#xf183;"></span>
 					</div>
 
 					<div class="contact100-form-checkbox">
-						<input class="input-checkbox100" id="ckb1" type="checkbox"
-							name="remember-me" /> <label class="label-checkbox100"
-							for="ckb1">Remember me </label>
+						<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me" /> <label class="label-checkbox100" for="ckb1">Remember me </label>
 					</div>
 
 					<div class="container-login100-form-btn">
@@ -36,18 +25,14 @@
 						</div>
 					</div>
 				</form>
-				<p id="invalid" class="invalid"
-					style="font-size: 16px; color: #e5e5e5; padding-top: 15px" />
+				<p id="invalid" class="invalid" style="font-size: 16px; color: #e5e5e5; padding-top: 15px" />
 				<%
 					if (session.getAttribute("noSession") != null) {
 				%>
-				<h3 style="color: #cccccc; padding-top: 20px;">The session is
-					not created, please login again</h3>
+				<h3 style="color: #cccccc; padding-top: 20px;">The session is not created, please login again</h3>
 				<div class="text-center p-t-90">
-					<form class="login100-form validate-form" action="handleLogout"
-						method="POST">
-						<button type="submit" class="txt1">Click here to login
-							again</button>
+					<form class="login100-form validate-form" action="handleLogout" method="POST">
+						<button type="submit" class="txt1">Click here to login again</button>
 					</form>
 				</div>
 				<%
