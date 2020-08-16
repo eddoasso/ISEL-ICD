@@ -45,7 +45,7 @@ public class DocumentXML {
 				System.out.println("Validacao do XML feita com sucesso");// Validacao com XSD realizada com sucesso!
 			else
 				System.out.println(
-						"O documento XML n�o � v�lido para o documento XSD");// Falhou a valida��o com XSD
+						"O documento XML n�o � v�lido para o documento XSD");// Falhou a validacao com XSD
 
 		} catch (Exception e) {
 			e.printStackTrace(System.out);
@@ -196,13 +196,13 @@ public class DocumentXML {
 		return novoElementoPergunta;
 	}
 
-	//fun��o para limpar o header
+	//funcao para limpar o header
 	private String getClearXMLString(String strXML) {
 		strXML = strXML.substring(61, strXML.length());
 		return strXML.replace("\n", "").replace("\r", "");
 	}
 
-	//fun��o que envia o xml em String corrigido
+	//funcao que envia o xml em String corrigido
 	public String sendResultWithCorrection(String strXML) {
 		System.out.println(strXML);
 		Document doc = XMLReadWrite.documentFromString(strXML);
@@ -249,23 +249,24 @@ public class DocumentXML {
 		return st + Expression.sendResultOfQuestionsEnd;
 
 	}
-	public static void main(String[] args) {
-		try {
-			DocumentXML docXML = new DocumentXML();
-			var v2 = docXML.addQuestionToXML("Cozinha", "Como se parte um ovo?",
-					"00:00:30",
-					new String[]{"com forca", "beija-o", "o que é um ovo?"}, 0);
-			var v1 = docXML.addQuestionToXML("XML", "XML é chato", "00:01:00",
-					new String[]{"verdadeiro", "muito verdadeiro", "ambas"}, 2);
 
-			System.out.println("deu 1 " + v1);
-			System.out.println("deu 2 " + v2);
-
-		} catch (ParserConfigurationException | SAXException
-				| IOException exception) {
-			// TODO Auto-generated catch block
-			exception.printStackTrace();
-		}
-
-	}
+	//	public static void main(String[] args) {
+	//		try {
+	//			DocumentXML docXML = new DocumentXML();
+	//			var v2 = docXML.addQuestionToXML("Cozinha", "Como se parte um ovo?",
+	//					"00:00:30",
+	//					new String[]{"com forca", "beija-o", "o que é um ovo?"}, 0);
+	//			var v1 = docXML.addQuestionToXML("XML", "XML é chato", "00:01:00",
+	//					new String[]{"verdadeiro", "muito verdadeiro", "ambas"}, 2);
+	//
+	//			System.out.println("deu 1 " + v1);
+	//			System.out.println("deu 2 " + v2);
+	//
+	//		} catch (ParserConfigurationException | SAXException
+	//				| IOException exception) {
+	//			// TODO Auto-generated catch block
+	//			exception.printStackTrace();
+	//		}
+	//
+	//	}
 }
