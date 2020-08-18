@@ -1,5 +1,7 @@
 package loginProf.xmlMessageConvert;
 
+import java.util.ArrayList;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
@@ -19,6 +21,29 @@ public class MessagesConverter {
 	public static String resultRegisterProfXML(String userName, String pass) {
 		return "<registaProf><userName>" + userName + "</userName><password>" + pass
 				+ "</password></registaProf>";
+	}
+	
+	public static String getResponseFromServer(String xmlMsg) {
+		ArrayList<CreateComServer> a = new ArrayList<CreateComServer>();
+		
+		CreateComServer com = new CreateComServer();
+		a.add(com);
+		
+		com.sendXMLToServer(xmlMsg);
+		String result = "";
+		for(;;) {
+			try {
+				Thread.sleep(100);
+				if(com.getResponseReceived() != null) {
+					result = com.getResponseReceived();
+					break;
+				}
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		a.remove(com);
+		return result;
 	}
 
 }

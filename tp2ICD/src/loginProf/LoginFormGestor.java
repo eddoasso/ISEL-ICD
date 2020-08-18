@@ -17,51 +17,43 @@ public class LoginFormGestor extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-		String user = request.getParameter("username");// vai buscar o name que esta no input da JSP
+		String user = request.getParameter("username");// vai buscar o name que está no input da JSP
 		String pass = request.getParameter("password");
 
-		boolean sessionCreated = false;
 		HttpSession session = request.getSession(false);
 		if (session == null) {
 			session = request.getSession();
-			sessionCreated = true;
+
 		}
 
 		if (validateLogin(user, pass)) {
 			createNewClientProf(user);// cria instancia professor fica guardado
-			ServerData.getProfByName(user)
-					.sendXMLToServer(sendUserPassServer(user, pass));// envia mensagem para o servidor
+			ServerData.getProfByName(user).sendXMLToServer(sendUserPassServer(user, pass));// envia mensagem para o servidor
 			try {
 				for (;;) {
 					Thread.sleep(100);
-					if (ServerData.getProfByName(user)
-							.getResponseReceived() != null) {
-						if (ServerData.getProfByName(user).getResponseReceived()
-								.equals("correto")) {
-							ServerData.getProfByName(user)
-									.resetResponseReceived();
+					if (ServerData.getProfByName(user).getResponseReceived() != null) {
+						if (ServerData.getProfByName(user).getResponseReceived().equals("correto")) {
+							ServerData.getProfByName(user).resetResponseReceived();
 							session.setAttribute("username", user);
-							if (session.getAttribute("existingKey") != null) {
-								session.setAttribute("existingKey", null);
+							if(session.getAttribute("existingKey") != null) {
+								session.setAttribute("existingKey",null);
 							}
-							if (session.getAttribute("errorKey") != null) {
-								session.setAttribute("errorKey", null);
+							if(session.getAttribute("errorKey") != null) {
+								session.setAttribute("errorKey",null);
 							}
-							getServletContext()
-									.getRequestDispatcher(
-											"/TemplatesProf/CreateRoom.jsp")
-									.forward(request, response);
+							getServletContext().getRequestDispatcher("/TemplatesProf/CreateRoom.jsp").forward(request,
+									response);
 							break;
 
 						} else {
 							ServerData.removeProfConnectedByName(user);
 							session.setAttribute("usernameError", user);
-							getServletContext().getRequestDispatcher(
-									"/ErrorPages/TemplateLoginProfError.jsp")
-									.forward(request, response);
+							getServletContext().getRequestDispatcher("/ErrorPages/TemplateLoginProfError.jsp").forward(request,
+									response);
 							break;
 						}
 					}
@@ -72,29 +64,19 @@ public class LoginFormGestor extends HttpServlet {
 
 		} else {
 			session.setAttribute("usernameError", user);
-			if (!sessionCreated)
-				getServletContext()
-						.getRequestDispatcher(
-								"/TemplatesProf/TemplateLoginProf.jsp")
-						.forward(request, response);
-
-			else
-				getServletContext()
-						.getRequestDispatcher(
-								"/ErrorPages/TemplateLoginProfError.jsp")
-						.forward(request, response);
+			getServletContext().getRequestDispatcher("/ErrorPages/TemplateLoginProfError.jsp").forward(request, response);
 
 		}
 
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 
-	// validaï¿½ï¿½es para username e password
+	// validações para username e password
 	private boolean validateLogin(String username, String password) {
 		if (checkUsername(username) && checkPassword(password)) {
 			return true;
@@ -109,7 +91,7 @@ public class LoginFormGestor extends HttpServlet {
 		}
 		return false;
 	}
-
+	
 	public static boolean isANumer(String s) {
 		if (s != null) {
 			String regex = "^\\d+$";
@@ -118,17 +100,16 @@ public class LoginFormGestor extends HttpServlet {
 		return false;
 	}
 
-	private boolean checkUsername(String username) {
-		if (isAlphaNumeric(username) && username.length() > 3
-				&& username.length() < 25) {
+
+	public static boolean checkUsername(String username) {
+		if (isAlphaNumeric(username) && username.length() > 3 && username.length() < 25) {
 			return true;
 		}
 		return false;
 	}
 
-	private boolean checkPassword(String password) {
-		if (isANumer(password) && password.length() > 3
-				&& password.length() < 25) {
+	public static boolean checkPassword(String password) {
+		if (isANumer(password) && password.length() > 5 && password.length() < 25) {
 			return true;
 		}
 		return false;
@@ -137,14 +118,13 @@ public class LoginFormGestor extends HttpServlet {
 	private void createNewClientProf(String profName) {
 		ClientServerProf prof = new ClientServerProf(profName);
 		ServerData.storeProfConnected(prof);
+
 	}
 
-	// funï¿½ï¿½o para mandar os dados para o servidor para serem validados
+	// função para mandar os dados para o servidor para serem validados
 	public String sendUserPassServer(String username, String password) {
-		return "<info id=\"" + ServerData.getIndexProfByName(username)
-				+ "\" client=\"prof\">" + "<username>" + username
-				+ "</username>" + "<password>" + password + "</password>"
-				+ "</info>";
+		return "<info id=\"" + ServerData.getIndexProfByName(username) + "\" client=\"prof\">" + "<username>" + username
+				+ "</username>" + "<password>" + password + "</password>" + "</info>";
 	}
 
 }

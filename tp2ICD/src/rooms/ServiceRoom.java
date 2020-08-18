@@ -101,7 +101,7 @@ public class ServiceRoom extends HttpServlet {
 	// função que retorna array 2 dimensões onde [0] = opcions e [1] = divs
 	// fomrato opions - <option value="1">deus</option>
 	// formato divs - <div id="d1">deus</div>
-	private String[] convertThemesToHTML() {
+	public static String[] convertThemesToHTML() {
 		String[] categorys = getThemesFromXML();
 
 		int count = 1;
@@ -120,7 +120,7 @@ public class ServiceRoom extends HttpServlet {
 	}
 
 	//mete perguntas com value do tema
-	private String getQuestionsFromXML() {
+	public static String getQuestionsFromXML() {
 		Document doc = ServerData.getDocumentQuestions();
 		NodeList category = (NodeList) doc.getElementsByTagName("categoria");
 
@@ -144,12 +144,12 @@ public class ServiceRoom extends HttpServlet {
 	}
 
 	// converte info para <li id="lb1-al" role="option" value="a">Alabama</li>
-	private String convertCategoryQuestionToHTML(String theme, String question, int index) {
+	private static String convertCategoryQuestionToHTML(String theme, String question, int index) {
 		return "<li id=\"q" + index + "\" name=\"q-name\" role=\"option\" value=\"" + theme + "\">" + question + "</li>\n";
 	}
 	
 	//mensagem no formato tempo,pergunta1,pergunta2,pergunta3,opc1,opc2,opc3
-	private String getInfoQuestion() {
+	private static String getInfoQuestion() {
 		Document doc = ServerData.getDocumentQuestions();
 		NodeList questions = doc.getElementsByTagName("pergunta");
 		String msn = "";
@@ -179,7 +179,7 @@ public class ServiceRoom extends HttpServlet {
 	}
 	
 	//converte string formato 00:01:00 para 60 segundos
-	private String convertStringTimeToSeconds(String time) {
+	private static String convertStringTimeToSeconds(String time) {
 		String[] timeSplit = time.split(":");
 		
 		int seconds = 0;
@@ -197,7 +197,7 @@ public class ServiceRoom extends HttpServlet {
 		return ""+seconds;
 	}
 	
-	private String convertInfoToScript() {
+	public static String convertInfoToScript() {
 		String script = "<script>selectorBasedOnQuestion(\"";
 		String str = getInfoQuestion();
 		String endScript = "\");</script>";

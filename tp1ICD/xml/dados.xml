@@ -27,5 +27,22 @@
 			<opcao resposta="errado">Protocolo de comunicação</opcao>
 		</pergunta>
 	</categoria>
+<categoria tema="fdgfdgdfg">
+<pergunta id="ID_4">
+<questao>dfgdfgdfg</questao>
+<tempo>00:05:33</tempo>
+<multimedia/>
+<opcao resposta="certo">fdfsdfsdf</opcao>
+<opcao resposta="errado">fdsfsdfsdfsdf</opcao>
+</pergunta>
+</categoria>
+<categoria tema="sffs">
+<pergunta id="ID_5">
+<questao>sdfsdfsdfs</questao>
+<tempo>00:00:33</tempo>
+<multimedia/>
+<opcao resposta="certo">sdfsdfsdfdsf</opcao>
+<opcao resposta="errado">sdfdsfdsds</opcao>
+</pergunta>
+</categoria>
 </categorias>
-

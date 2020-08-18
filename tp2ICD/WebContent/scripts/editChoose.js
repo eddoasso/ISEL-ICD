@@ -158,6 +158,74 @@ function selectorBasedOnQuestion(info) {
 	}
 }
 
+//função da set das perguntas para os alunos
+function setQuestionToStudent(info){
+	let listInfo = info.split(",");
+	
+	document.getElementById("theme1").value = listInfo[0];
+	if(listInfo[1].length > 300){
+		document.getElementById("quest1").value = listInfo[1].substring(0,300);
+		document.getElementById("quest2").value = listInfo[1].substring(301,listInfo[1].length);
+	}else{
+		document.getElementById("quest1").value = listInfo[1];
+	}
+	document.getElementById("question-time").value = listInfo[2];
+	for(let i = 1; i < listInfo.length-2;i++){
+		document.getElementById("op"+i).value = listInfo[2+i];
+	}
+	
+	switch(listInfo.length-3){
+		case 2:
+			document.getElementById("op-a").disabled = false;
+			document.getElementById("op-b").disabled = false;
+			break;
+		case 3:
+			document.getElementById("op-a").disabled = false;
+			document.getElementById("op-b").disabled = false;
+			document.getElementById("op-c").disabled = false;
+			break;
+		case 4:
+			document.getElementById("op-a").disabled = false;
+			document.getElementById("op-b").disabled = false;
+			document.getElementById("op-c").disabled = false;
+			document.getElementById("op-d").disabled = false;
+			break;
+		case 5:
+			document.getElementById("op-a").disabled = false;
+			document.getElementById("op-b").disabled = false;
+			document.getElementById("op-c").disabled = false;
+			document.getElementById("op-d").disabled = false;
+			document.getElementById("op-e").disabled = false;
+			break;
+			
+		case 6:
+			document.getElementById("op-a").disabled = false;
+			document.getElementById("op-b").disabled = false;
+			document.getElementById("op-c").disabled = false;
+			document.getElementById("op-d").disabled = false;
+			document.getElementById("op-e").disabled = false;
+			document.getElementById("op-f").disabled = false;
+			break;
+	}
+	
+	document.getElementById("see-info").removeAttribute("href");
+	document.getElementById("see-correction").removeAttribute("href");
+}
+
+//função da set das perguntas para os alunos
+function setInfoToStudent(info){
+	let listInfo = info.split(",");
+	
+	document.getElementById("first-name").value = listInfo[0];
+	document.getElementById("last-name").value = listInfo[1];
+	document.getElementById("student-number").value = listInfo[2];
+	document.getElementById("birthday").value = listInfo[3];
+}
+
+function setUsernameToEditProf(username){
+	document.getElementById("prof-user").value = username;
+}
+
 
 function resetAllCheckedBox(){
 	document.getElementById("op-a").checked = false;
@@ -169,25 +237,6 @@ function resetAllCheckedBox(){
 }
 
 
-
-/*function selectorTheme(){
-	let childCount = document.getElementById("teste").childElementCount;
-	let childCountQuest = document.getElementById("cb1-listbox").childElementCount;
-	for (let i = 1; i < childCount+1; i++) {
-		let elemento = document.getElementById("d" + i);
-		elemento.addEventListener("click", function(e) {
-			for (let j = 1; j < childCountQuest+1; j++) {
-				let elementoQ = document.getElementById("q" + j);
-				if(elementoQ.getAttribute("value") !== elemento.textContent){
-					elementoQ.style.display = "none";
-				}
-				else{
-					elementoQ.style.display = "block";
-				}
-			}
-		});
-	}
-}*/
 
 function resetAll(){
 	let btn = document.getElementById("reset-all");
@@ -201,14 +250,6 @@ function resetAll(){
 				elemento.classList.remove("same-as-selected");
 			}
 		}
-		//document.getElementById("cb1-input").value = "";
-		/*for (let i = 1; i < childCountQuest+1; i++) {
-			console.log("reset "+i);
-			console.log("childCount "+childCountQuest);
-			let elementoQ = document.getElementById("q" + i);
-			console.log("elemento "+elementoQ);
-			elementoQ.style.display = "block";
-		}*/
 		document.getElementById("question-time").value = "";
 		document.getElementById("op1").value = "";
 		document.getElementById("op2").value = "";

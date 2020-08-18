@@ -9,6 +9,7 @@ import java.util.concurrent.Semaphore;
 
 import PathAndExpressions.Expression;
 import server.xml.DocumentXML;
+import server.xml.SerializeObjectsXML;
 
 class HandleConnectionThread extends Thread {
 
@@ -20,8 +21,7 @@ class HandleConnectionThread extends Thread {
 	private DataDynamicStructure data;
 	private Semaphore semaphore;
 
-	public HandleConnectionThread(Socket connection, DocumentXML doc,
-			DataDynamicStructure data) {
+	public HandleConnectionThread(Socket connection,DocumentXML doc,DataDynamicStructure data) {
 		this.connection = connection;
 		this.doc = doc;
 		this.data = data;
@@ -32,11 +32,9 @@ class HandleConnectionThread extends Thread {
 	public void run() {
 		try {
 			// circuito virtual estabelecido: socket cliente na variavel newSock
-			System.out.println("Thread " + this.getId() + ": "
-					+ connection.getRemoteSocketAddress());
+			System.out.println("Thread " + this.getId() + ": " + connection.getRemoteSocketAddress());
 
-			in = new BufferedReader(
-					new InputStreamReader(connection.getInputStream()));
+			in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 			out = new PrintWriter(connection.getOutputStream(), true);
 
 			String inputLine;
@@ -45,26 +43,34 @@ class HandleConnectionThread extends Thread {
 				if ((inputLine = in.readLine()) != null) {
 					semaphore.acquire();
 					System.out.println("Recebi -> " + inputLine);
-					if (inputLine.substring(0, 8).equals("<info id")) {
+					if(inputLine.substring(0,8).equals("<info id")) {
 						out.println(data.checkInfoProf(inputLine));
 					}
-					//vai buscar o documento XML
-					else if (inputLine.equals(Expression.requestForXmlFile)) {
+					else if (inputLine.equals(Expression.requestForXmlFile)) //vai buscar o documento XML
 						out.println(ServidorTCPConcorrente.getStringXML());
-					} else if (inputLine.startsWith(Expression.putNewProf)) {
-						data.writeToProfXML(inputLine);
+					
+					else if (inputLine.substring(0,12).equals("<changepass>"))
+						out.println(SerializeObjectsXML.changePassword(inputLine));
+					
+					else if (inputLine.startsWith(Expression.putNewProf)) {
+						out.println(data.writeToProfXML(inputLine));
+						
+					} else if (inputLine.startsWith(Expression.putNewQuestion)) {
+						if(data.addQuestionToXML(inputLine)) {
+							out.println(ServidorTCPConcorrente.getStringXMLReload());
+						}else {
+							out.println(Expression.errorAddQuestion);
+						}
 					}
-
-					// @formatter:off
 					/*if (inputLine.substring(0,10).equals(Expression.requestForQuestions)) {
-						if (data.getQuestions().length == 0) //quando nï¿½o hï¿½ pergunta envia empty
+						if (data.getQuestions().length == 0) //quando não há pergunta envia empty
 							out.println(Expression.questionSectionEmpty);
 						
 							
-						else {//existe informaï¿½ï¿½o
-							if (data.canAccessQuestion(inputLine)) //verifica pode aceder a informaï¿½ï¿½o
+						else {//existe informação
+							if (data.canAccessQuestion(inputLine)) //verifica pode aceder a informação
 								out.println(doc.questionXMLFormat(data.getQuestions()[data.indexOfQuest(inputLine)]));
-							else if(data.shouldIncreaseIndex(inputLine)) //caso n possa mas existam outras perguntas dï¿½ increase e volta a perguntar
+							else if(data.shouldIncreaseIndex(inputLine)) //caso n possa mas existam outras perguntas dá increase e volta a perguntar
 								out.println(Expression.increaseQuestionIndex);
 							
 							else
@@ -75,18 +81,18 @@ class HandleConnectionThread extends Thread {
 						data.addQuestion(inputLine);
 						
 					
-					else if (inputLine.substring(0,8).equals(Expression.notifyAlive))//mensagem avisar o server que estï¿½ vido
+					else if (inputLine.substring(0,8).equals(Expression.notifyAlive))//mensagem avisar o server que está vido
 						data.addStudent(data.processNotifyXML(inputLine));
 					
 					else if (inputLine.equals(Expression.requestForStudents)) //request para os alunos conetados
 						out.println(data.createStudentesConnectedXML());
 
-					else if (inputLine.substring(0,8).equals(Expression.submitQuestion)){ //guarda as respostas dadas pelo aluno
+					else if (inputLine.substring(0,8).equals(Expression.submitQuestion)){//guarda as respostas dadas pelo aluno
 						String number = data.processStudentNumber(inputLine);
 						data.addStudentForQuestion(number);
 						data.addAnswersToStudents(number, data.processAnswerOfStudent(inputLine));
 					} 
-					else if (inputLine.equals(Expression.requestForAnswers))  //guarda as respostas dadas pelo aluno
+					else if (inputLine.equals(Expression.requestForAnswers))//guarda as respostas dadas pelo aluno
 						out.println(data.sendStudentAnswers());
 
 					else if (inputLine.substring(0,12).equals(Expression.requestForResults))//envia os resultados das perguntas
@@ -94,17 +100,15 @@ class HandleConnectionThread extends Thread {
 					
 					else if (inputLine.substring(0,12).equals(Expression.disconnectMessage)) // enviar o servidor que o aluno X de desconctou
 						data.processDisconnectMessage(inputLine);*/
-
-					// @formatter:on
-
+					
 					semaphore.release();
 				}
 			}
 
 		} catch (IOException | InterruptedException e) {
-			System.err.println(
-					"erro na ligacao " + connection + ": " + e.getMessage());
+			System.err.println("erro na ligaçao " + connection + ": " + e.getMessage());
 		}
 	}
-
+	
+	
 }

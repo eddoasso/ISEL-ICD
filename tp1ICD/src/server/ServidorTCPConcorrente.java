@@ -63,6 +63,10 @@ public class ServidorTCPConcorrente {
 	protected static String getStringXML() {
 		return doc.xmlDocStringFormat();
 	}
+	
+	protected static String getStringXMLReload() {
+		return doc.xmlDocStringFormatReload();
+	}
 
 }
 

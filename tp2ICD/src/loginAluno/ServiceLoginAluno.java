@@ -9,7 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+
 import serverData.ServerData;
+import submitQuestions.ServiceSubmitQuestion;
+import xmlWriter.XMLReadWrite;
 
 @WebServlet("/handleAlunoLogin")
 public class ServiceLoginAluno extends HttpServlet {
@@ -29,16 +34,33 @@ public class ServiceLoginAluno extends HttpServlet {
 		if (session == null) {
 			session = request.getSession();
 		}
+		
+		if ((String) session.getAttribute("studentKey") == null || (String) session.getAttribute("studentKey") == "") {// sessão destruida
+			session.setAttribute("errorSession", "");
+			getServletContext().getRequestDispatcher("/TemplatesAluno/TemplateLoginAluno.jsp").forward(request,
+					response);
 
-		if (validateLogin(firstname, lastname, number, birthday)) {
-			// cria instancia aluno ficar guardado, se ja existir o número não deixa criar
-			if ((String) session.getAttribute("key") == null || (String) session.getAttribute("key") == "") {// sessão destruida
-				session.setAttribute("errorSession", "");
-				getServletContext().getRequestDispatcher("/TemplatesAluno/TemplateLoginAluno.jsp").forward(request,response);
-			} else if (createNewClientStudent(firstname, lastname, number, birthday,(String) session.getAttribute("key"))) {// parte onde acerta
+		}else if (validateLogin(firstname, lastname, number, birthday)) {// cria instancia aluno ficar guardado, se ja existir o número não deixa criar
+			if (createNewClientStudent(firstname, lastname, number, birthday,(String) session.getAttribute("studentKey"))) {// parte onde acerta
 				session.setAttribute("studentNumber", number);
+				if(session.getAttribute("submitError") != null)
+					session.setAttribute("submitError",null);
+				session.setAttribute("infoStudent", createMessageToShowQuestion((String) session.getAttribute("studentKey"),number));
+				if(session.getAttribute("infoStudent") != null) {
+					ServerData.countTimeToExecute(ServerData.getTimeToAnswerQuestion((String) session.getAttribute("studentKey"), number),number);
+					session.setAttribute("countTime", ServiceSubmitQuestion.createScriptTimer());
+				}
+				else
+					session.setAttribute("countTime", null);
+				
 				getServletContext().getRequestDispatcher("/TemplatesAluno/WaitingRoom.jsp").forward(request, response);
-			} else {// ja existe o numero guardado
+			}else if(ServerData.verifyStudentNumberAndName(firstname, number, (String) session.getAttribute("studentKey"))) {
+				if(session.getAttribute("submitError") != null)
+					session.setAttribute("submitError",null);
+				getServletContext().getRequestDispatcher("/TemplatesAluno/WaitingRoom.jsp").forward(request, response);
+			}
+			
+			else {// ja existe o numero guardado
 				session.setAttribute("existingNumber", "");
 				getServletContext().getRequestDispatcher("/TemplatesAluno/TemplateLoginAluno.jsp").forward(request,response);
 			}
@@ -162,5 +184,31 @@ public class ServiceLoginAluno extends HttpServlet {
 		return false;
 
 	}
+	
+	// retorna string de script a chamar função js para mostrar resultados
+	public static String createMessageToShowQuestion(String key, String studentNumber) {
+		String data = ServerData.getQuestionByStudentNumber(key, studentNumber);
+		if (data != null && !data.equals("")) {
+			Document doc = XMLReadWrite.documentFromString(data);
 
+			if (doc != null) {
+				String theme = doc.getElementsByTagName("theme").item(0).getTextContent();
+				String question = doc.getElementsByTagName("quest").item(0).getTextContent();
+				String time = doc.getElementsByTagName("time").item(0).getTextContent();
+				NodeList listAns = doc.getElementsByTagName("answer");
+				String xmlAnswers = "";
+				for (int i = 0; i < listAns.getLength(); i++) {
+					if (i != listAns.getLength() - 1)
+						xmlAnswers = xmlAnswers + listAns.item(i).getTextContent() + ",";
+					else
+						xmlAnswers = xmlAnswers + listAns.item(i).getTextContent();
+				}
+				String msnInfoXML = theme + "," + question + "," + time + "," + xmlAnswers;
+				return "<script>setQuestionToStudent(\"" + msnInfoXML + "\");</script>";
+
+			}
+			return null;
+		}
+		return null;
+	}
 }

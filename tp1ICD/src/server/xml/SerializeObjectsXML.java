@@ -8,97 +8,126 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.List;
 
+import org.w3c.dom.Document;
+
 import PathAndExpressions.Path;
+import xml.XMLReadWrite;
 
 public class SerializeObjectsXML {
-
-	private static final String FILENAME = Path.pathXML + "users.xml";
-
-	public static boolean addUser(String username, String password) {
+	
+	private static final String FILENAME = Path.pathXML+"users.xml";
+	
+	public static boolean addUser(String username,  String password) {
 		try {
-
-			final XMLDecoder decoder = new XMLDecoder(
-					new FileInputStream(FILENAME));
+			
+			final XMLDecoder decoder = new XMLDecoder(new FileInputStream(FILENAME));
 			@SuppressWarnings("unchecked")
-			final List<String> listFromFile = (List<String>) decoder
-					.readObject();
+			final List<String> listFromFile = (List<String>) decoder.readObject();
 			decoder.close();
-
-			for (int i = 0; i < listFromFile.size(); i++) {
-				if (listFromFile.get(i).equals(username)) {
+			
+			for(int i = 0; i < listFromFile.size();i++) {
+				if(listFromFile.get(i).equals(username)) {
 					return false;
-				} else
+				}
+				else
 					i++;
 			}
 
 			listFromFile.add(username);
 			listFromFile.add(password);
 			// serializar para XML
-			final XMLEncoder encoder = new XMLEncoder(
-					new BufferedOutputStream(new FileOutputStream(FILENAME)));
+			final XMLEncoder encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(FILENAME)));
 			encoder.writeObject(listFromFile);
 			encoder.close();
 			return true;
-		} catch (FileNotFoundException e) {
+		}catch (FileNotFoundException e) {
 			e.printStackTrace();
 			return false;
 		}
 	}
-
-	public static boolean validateUser(String username, String password) {
+	
+	public static boolean addUserWithoutCheck(String username,  String password) {
 		try {
-			System.out.println("SerializeObject username " + username
-					+ " password " + password);
-			final XMLDecoder decoder = new XMLDecoder(
-					new FileInputStream(FILENAME));
+			
+			final XMLDecoder decoder = new XMLDecoder(new FileInputStream(FILENAME));
 			@SuppressWarnings("unchecked")
-			final List<String> listFromFile = (List<String>) decoder
-					.readObject();
+			final List<String> listFromFile = (List<String>) decoder.readObject();
+			decoder.close();
+			
+			for(int i = 0; i < listFromFile.size();i++) {
+				if(listFromFile.get(i).equals(username)) {
+					listFromFile.remove(i);
+					listFromFile.remove(i);
+					break;
+				}
+				else
+					i++;
+			}
+			
+			listFromFile.add(username);
+			listFromFile.add(password);
+			// serializar para XML
+			final XMLEncoder encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(FILENAME)));
+			encoder.writeObject(listFromFile);
+			encoder.close();
+			return true;
+		}catch (FileNotFoundException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	public static boolean validateUser(String username,  String password) {
+		try {
+			
+			final XMLDecoder decoder = new XMLDecoder(new FileInputStream(FILENAME));
+			@SuppressWarnings("unchecked")
+			final List<String> listFromFile = (List<String>) decoder.readObject();
 			decoder.close();
 
-			for (int i = 0; i < listFromFile.size(); i++) {
-				if (listFromFile.get(i).equals(username)) {
-					if (listFromFile.get(i + 1).equals(password))
+			for(int i = 0; i < listFromFile.size();i++) {
+				if(listFromFile.get(i).equals(username)) {
+					if(listFromFile.get(i+1).equals(password)) 
 						return true;
 					return false;
-				} else
+				}else 
 					i++;
-
+				
 			}
 			return false;
-		} catch (FileNotFoundException e) {
+		}catch (FileNotFoundException e) {
 			e.printStackTrace();
 			return false;
 		}
 	}
-
-	public static boolean validateNewUserInputs(String username,
-			String password) {
-
-		if (username.isBlank() || password.isBlank()) {
-			return false;
+	
+	public static String changePassword(String xmlStr) {
+		Document doc = XMLReadWrite.documentFromString(xmlStr);
+		String user = doc.getElementsByTagName("user").item(0).getTextContent();
+		String oldPass = doc.getElementsByTagName("old").item(0).getTextContent();
+		
+		if(!validateUser(user,oldPass)) {
+			return "<resultpass>insucesso</resultpass>";
+			
 		}
-		if (!(username.matches("^[a-zA-Z0-9 ]+$") && username.length() > 4
-				&& username.length() < 64)
-				|| !(password.matches("^[A-Za-z]\\w{7,15}$"))) {
-			System.out.println("Nao validou o input do utilizador " + username
-					+ " com passe " + password);
-			return false;
+		
+		String newPass = doc.getElementsByTagName("new").item(0).getTextContent();
+		if(addUserWithoutCheck(user,newPass)) {
+			return "<resultpass>sucesso</resultpass>";
 		}
-		return true;
 
+		return "<resultpass>insucesso</resultpass>";
+		
 	}
+	
+	/*public static void main(String[] args) {
 
-	/*
-	 * public static void main(String[] args) {
-	 * SerializeObjectsXML a = new SerializeObjectsXML();
-	 * /*a.addUser("deus", "1234567");
-	 * a.addUser("miguel", "123456");
-	 * a.addUser("pedro", "123456");
-	 * a.addUser("corrida", "123456");
-	 * a.addUser("deus", "123456");
-	 * //a.addUser("stor", "123456");
-	 * System.out.println(a.validateUser("stor", "1234567"));
-	 * }
-	 */
+		addUser("deus", "123456");
+		addUser("miguel", "123456");
+		addUser("pedro", "123456");
+		addUser("corrida", "123456");
+		addUser("deus", "123456");
+		addUser("stor", "123456");
+		
+	}*/
 }

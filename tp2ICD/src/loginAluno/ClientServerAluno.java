@@ -2,10 +2,12 @@ package loginAluno;
 
 public class ClientServerAluno {
 	
+	public int questionIndex;
 	private String firstName;
 	private String lastName;
 	private String number;
 	private String birthdayDate;
+	
 
 
 	public ClientServerAluno(String firstName,String lastName, String number, String birthdayDate) {
@@ -13,6 +15,7 @@ public class ClientServerAluno {
 		this.lastName = lastName;
 		this.number = number;
 		this.birthdayDate = birthdayDate;
+		questionIndex = 0;
 	}
 	
 	public String getFirstName() {
@@ -29,6 +32,18 @@ public class ClientServerAluno {
 	
 	public String getBirthday() {
 		return this.birthdayDate;
+	}
+	
+	public int getCurrentQuestionIndex() {
+		return this.questionIndex;
+	}
+	
+	public void increaseCurrentQuestionIndex() {
+		this.questionIndex++;
+	}
+	
+	public void setCurrentCquestionIndex(int index) {
+		this.questionIndex = index;
 	}
 	
 }

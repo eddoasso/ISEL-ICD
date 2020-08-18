@@ -538,5 +538,11 @@ iframe {
 
 .text-center {text-align: center;}
 
+/*Check box ---------------*/
 
+input[type=checkbox] {
+    transform: scale(1.6);
+    -ms-transform: scale(1.6);
+    -webkit-transform: scale(1.6);
+}
 

@@ -2,7 +2,41 @@
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
-<jsp:include page="../JSPIncludes/standardHead.jsp" />
+<head>
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>UnioN</title>
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+<link rel="stylesheet" type="text/css" href="css/styleIndex.css" />
+
+<!-- Favicons -->
+<link href="images/icons/favicon.png" rel="icon" />
+<link href="images/icons/apple-touch-icon.png" rel="apple-touch-icon" />
+
+<!-- Google Fonts -->
+<link
+	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous" />
+	
+<!-- j-Query -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	
+<link rel="stylesheet" type="text/css"
+	href="assets/fonts/iconic/css/material-design-iconic-font.min.css" />
+
+<!-- Vendor CSS Files -->
+<link href="assets/vendor/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet">
+<link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+
+
+<script src="scripts/main.js"></script>
+
+</head>
 
 <body>
 	<!-- ======= Header ======= -->
@@ -12,13 +46,13 @@
 		<div class="container d-flex align-items-center"
 			style="max-width: none;">
 			<div class="logo mr-auto">
-				<a href="index.php"><img src="../images/logo2.png" alt=""
+				<a href="index.php"><img src="images/logo2.png" alt=""
 					class="img-fluid" style="max-height: 50px; border-radius: 6px;"></a>
 			</div>
 			<nav class="nav-menu d-none d-lg-block" style="float: right;">
 				<ul>
-					<li class="active"><a href="#" style="font-size: 18px;"><%=session.getAttribute("username")%></a></li>
-					<li><a href="#" style="font-size: 18px;">Check Answers</a></li>
+					<li class="active"><a id="see-info" href="handleCheckDataStudent" style="font-size:18px;">Student <%= session.getAttribute("studentNumber") %></a></li>
+					<li><a id="see-correction" href="handleShowCorrection" style="font-size:18px;">Check Answers</a></li>
 				</ul>
 			</nav>
 		</div>
@@ -26,95 +60,79 @@
 
 	<div class="limiter">
 		<div class="container-login100"
-			style="background-image: url('../images/bg-01.jpg');">
+			style="background-image: url('images/bg-01.jpg');">
 			<div class="wrap-login100" style="width: 70%;">
-				<form class="login100-form validate-form"
-					action="handleSendQuestion" method="POST"
-					onSubmit="return validateQuestions()">
+				<form  id="myForm" class="login100-form validate-form" action="handleSubmitQuestion" method="POST" onSubmit="return validateSubmitStudentQuest()">
 
 					<span class="login100-form-title p-b-34 p-t-27"
 						style="padding-top: 0px; font-size: 45px;">Answer Questions</span>
-					<%
-						if (session.getAttribute("submitQuest") != null) {
-					%>
-					<%
-						if (session.getAttribute("submitQuest").equals("success")) {
-					%>
-					<span class="login100-form-title p-b-34 p-t-27"
-						style="font-size: 32px; color: #89cff0">Question submited
-						with success</span>
-					<%
-						} else if (session.getAttribute("submitQuest").equals("failure")) {
-					%>
-					<span class="login100-form-title p-b-34 p-t-27"
-						style="font-size: 32px; color: #ff6666">Question not
-						submited with success</span>
-					<%
-						}
-					%>
-					<%
-						}
-					%>
-
+					
+					<% if(session.getAttribute("submitError") != null){%>
+						<span class="login100-form-title p-b-34 p-t-27"
+							style="padding-top: 0px; font-size: 32px;color: #ff6666">Can't submit without a question</span>
+					<% } else if(session.getAttribute("existingQuest") != null){%>
+						<span class="login100-form-title p-b-34 p-t-27"
+							style="padding-top: 0px; font-size: 32px;color: #ff6666">Can't reload with a question to answer</span>
+					<% }%>
 					<div style="display: flex; align-items: center">
 						<label for="theme1"
 							style="font-family: Poppins-Medium; color: #fff; font-size: 24px; padding-right: 20px;">Theme:</label>
 						<div class="wrap-input100 validate-input"
-							data-validate="Enter password" style="width: 80%;">
-							<input id="theme1" name="theme1" class="input100" type="text"
-								placeholder="Question theme"
-								style="padding: 0px; margin-top: 20px;" disabled />
+							data-validate="Enter password" style="width: 30%;">
+							<input id="theme1" name="theme1" class="input100" type="text" 
+								placeholder="Question theme" style="padding: 0px; margin-top: 20px;font-size: 20px;"
+								disabled />
 						</div>
 					</div>
-
+					
 					<div style="display: flex; align-items: center">
 						<label for="quest1"
-							style="font-family: Poppins-Medium; color: #fff; font-size: 24px; padding-right: 20px; padding-top: 5px;">Question:</label>
+							style="font-family: Poppins-Medium; color: #fff; font-size: 24px; padding-right: 20px;padding-top:5px;">Question:</label>
 						<div class="wrap-input100 validate-input"
-							data-validate="Enter password" style="width: 80%; margin: 0px;">
-							<input id="quest1" name="quest1" class="input100" type="text"
-								placeholder="Question" style="padding: 0px;" disabled />
-
+							data-validate="Enter password" style="width: 80%;margin:0px;">
+							<input id="quest1" name="quest1" class="input100" type="text" 
+								placeholder="Question" style="padding: 0px;font-size: 20px;"
+								disabled />
+							
 						</div>
 					</div>
-
-
-					<div style="display: flex; align-items: center; margin-left: 11%;">
+					
+					
+					<div style="display: flex; align-items: center;margin-left:11%;">
 						<div class="wrap-input100 validate-input"
 							data-validate="Enter password" style="width: 90%;">
 							<input id="quest2" name="quest2" class="input100" type="text"
-								style="padding: 0px; margin-top: 20px;" disabled />
+								style="padding: 0px; margin-top: 20px;font-size: 20px;" disabled />
 						</div>
 					</div>
-
-
+					
+					
 					<div style="display: flex; align-items: center">
 						<label for="question-time"
 							style="font-family: Poppins-Medium; color: #fff; font-size: 24px; padding-right: 20px;">Time:</label>
 						<div class="wrap-input100 validate-input"
 							data-validate="Enter username"
-							style="margin-top: 20px; width: 21%">
+							style="margin-top:20px; width: 21%">
 
 							<input id="question-time" name="question-time" class="input100"
-								type="text" placeholder="time in seconds" style="padding: 0px;"
-								disabled />
+								type="text" placeholder="time in seconds" style="padding: 0px;font-size: 20px;" disabled/>
 						</div>
 					</div>
-
+					
 
 
 					<!-- Opções de resposta -->
 					<section style="padding: 40px 0;">
-
-
+					
+					
 						<div>
 							<label for="lab1"
 								style="font-family: Poppins-Medium; color: #fff; font-size: 24px;">Opcions</label>
 							<label for="check1"
 								style="font-family: Poppins-Medium; color: #fff; font-size: 24px; margin-left: 81%">Answers</label>
 						</div>
-
-
+						
+						
 
 						<div style="display: flex; align-items: center" id="lab1">
 							<label for="op1"
@@ -125,8 +143,7 @@
 									placeholder="Opcion 1" style="padding: 0px; margin-top: 20px;"
 									disabled />
 							</div>
-							<input type="checkbox" id="op-a" name="op-a" value="a"
-								style="margin-left: 10%;">
+							<input type="checkbox" id="op-a" name="op-a" value="a" style="margin-left: 10%;" disabled>
 						</div>
 
 						<div style="display: flex; align-items: center">
@@ -139,7 +156,7 @@
 									disabled />
 							</div>
 							<input type="checkbox" id="op-b" name="op-b" value="a"
-								style="margin-left: 10%;">
+								style="margin-left: 10%;" disabled>
 						</div>
 
 
@@ -154,7 +171,7 @@
 									disabled />
 							</div>
 							<input type="checkbox" id="op-c" name="op-c" value="a"
-								style="margin-left: 10%;">
+								style="margin-left: 10%;" disabled>
 						</div>
 
 						<div style="display: flex; align-items: center">
@@ -167,7 +184,7 @@
 									disabled />
 							</div>
 							<input type="checkbox" id="op-d" name="op-d" value="a"
-								style="margin-left: 10%;">
+								style="margin-left: 10%;" disabled>
 						</div>
 
 						<div style="display: flex; align-items: center">
@@ -180,7 +197,7 @@
 									disabled />
 							</div>
 							<input type="checkbox" id="op-e" name="op-e" value="a"
-								style="margin-left: 10%;">
+								style="margin-left: 10%;" disabled>
 						</div>
 
 						<div style="display: flex; align-items: center">
@@ -193,7 +210,7 @@
 									disabled />
 							</div>
 							<input type="checkbox" id="op-f" name="op-f" value="a"
-								style="margin-left: 10%;">
+								style="margin-left: 10%;" disabled>
 						</div>
 					</section>
 
@@ -206,6 +223,9 @@
 					</div>
 					<p id="invalid" class="invalid"
 						style="font-size: 16px; color: #e5e5e5; padding-top: 15px" />
+					<div class="text-center p-t-90">
+						<a class="txt1" href="handleReloadQuestion" style="font-size:15px;"> Click here to check if there is any new questions </a>
+					</div>
 				</form>
 			</div>
 		</div>
@@ -223,7 +243,16 @@
 	</footer>
 
 	<a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
-
+	<script src="scripts/editChoose.js"></script>
+	
+	<% if(session.getAttribute("infoStudent") != null){%>
+		<% pageContext.getOut().write("" +(session.getAttribute("infoStudent")));%>
+	<% }%>
+	
+	<% if(session.getAttribute("countTime") != null){%>
+		<% pageContext.getOut().write("" +(session.getAttribute("countTime")));%>
+	<% }%>
+	
 </body>
 
 </html>

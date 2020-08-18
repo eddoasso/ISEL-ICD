@@ -20,7 +20,7 @@ public class ServiceConnectStudentRoom extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String key = request.getParameter("key");// vai buscar o name que estï¿½ no input da JSP
+		String key = request.getParameter("key");// vai buscar o name que está no input da JSP
 
 		HttpSession session = request.getSession(false);
 		if (session == null) {
@@ -29,7 +29,13 @@ public class ServiceConnectStudentRoom extends HttpServlet {
 
 		if (LoginFormGestor.isAlphaNumeric(key) && key.length() > 3 && key.length() < 26) {
 			if (ServerData.checkExistingKey(key)) {
-				session.setAttribute("key", key);
+				session.setAttribute("studentKey", key);
+				
+				if(session.getAttribute("existingNumber") != null) 
+					session.setAttribute("existingNumber",null);
+				if(session.getAttribute("errorData") != null) 
+					session.setAttribute("errorData",null);
+				
 				getServletContext().getRequestDispatcher("/TemplatesAluno/TemplateLoginAluno.jsp").forward(request,
 						response);
 			} else {
