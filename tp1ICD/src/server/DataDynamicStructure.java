@@ -15,6 +15,7 @@ import org.xml.sax.SAXException;
 import PathAndExpressions.Expression;
 import server.xml.DocumentXML;
 import server.xml.SerializeObjectsXML;
+import server.xml.ValidatorXML;
 import xml.XMLReadWrite;
 
 public class DataDynamicStructure {//função para validar guardar e outras funções
@@ -270,7 +271,7 @@ public class DataDynamicStructure {//função para validar guardar e outras funçõe
 		String idProf = infoList.item(0).getAttributes().getNamedItem("id").getNodeValue();
 		
 		
-		if(SerializeObjectsXML.validateUser(user, pass)) {
+		if(SerializeObjectsXML.validateUser(user, pass) && ValidatorXML.validateProfLogin(xmlInfo)) {
 			return "<info id=\""+idProf+"\" client=\"prof\">"
 					+ "<answer>correto</answer>"
 				  +"</info>";
@@ -288,7 +289,7 @@ public class DataDynamicStructure {//função para validar guardar e outras funçõe
 		String username = doc.getElementsByTagName("userName").item(0).getTextContent();
 		String password = doc.getElementsByTagName("password").item(0).getTextContent();
 
-		if (SerializeObjectsXML.addUser(username, password)) {
+		if (SerializeObjectsXML.addUser(username, password) && ValidatorXML.validateAddProf(strXML)) {
 			return "<newprof>sucesso</newprof>";
 		}
 
@@ -331,9 +332,11 @@ public class DataDynamicStructure {//função para validar guardar e outras funçõe
 		for (int i = 0; i < rawCorrect.getLength(); i++) {
 			responses[i] = rawCorrect.item(i).getTextContent();
 		}
-		
-		return addQuestionToXML(theme, question, time,
-				 options.toArray(new String[0]), responses);
+		if(ValidatorXML.validateAddQuestion(inputLine)) {
+			return addQuestionToXML(theme, question, time, options.toArray(new String[0]), responses);
+		}
+		else
+			return false;
 	}
 
 }

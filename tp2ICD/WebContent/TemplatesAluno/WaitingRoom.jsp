@@ -52,7 +52,13 @@
 			<nav class="nav-menu d-none d-lg-block" style="float: right;">
 				<ul>
 					<li class="active"><a id="see-info" href="handleCheckDataStudent" style="font-size:18px;">Student <%= session.getAttribute("studentNumber") %></a></li>
+					<% if(session.getAttribute("profOnline") != null){%>
+						<li><a id="see-correction" href="#" style="font-size:18px;color:#03C04A">Teacher online</a></li>
+					<% }else {%>
+						<li><a id="see-correction" href="#" style="font-size:18px;color:#ff6666">Teacher offline</a></li>
+					<% }%>
 					<li><a id="see-correction" href="handleShowCorrection" style="font-size:18px;">Check Answers</a></li>
+					<li><a href="handleLogoutStudent" style="font-size:18px;">Logout</a></li>
 				</ul>
 			</nav>
 		</div>

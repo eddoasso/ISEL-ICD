@@ -32,9 +32,24 @@ public class ServiceProfCheckAnswers extends HttpServlet {
 		} else {
 			session.setAttribute("showAllCorrection",
 					ServerData.getAllStudentsAnswers((String) session.getAttribute("key")));
+			session.setAttribute("minConnect",
+					convertTimeMinToHTML(ServerData.getAllStudentsMinutsConnected((String) session.getAttribute("key")),(String) session.getAttribute("key")));
 			getServletContext().getRequestDispatcher("/TemplatesProf/ViewAllAnswers.jsp").forward(request, response);
 		}
 
 	}
+	
+	private String convertTimeMinToHTML(long[] timeConnected, String key) {
+		if(timeConnected != null) {
+			String html = "";
+			String[] studentNumbers =  ServerData.getStudentsConnected(key);
+			for(int i = 0; i < timeConnected.length;i++) {
+				html+= "<li><a href=\"#\">"+studentNumbers[i]+" connetected "+timeConnected[i]+"min</a></li>\n";
+			}
+			return html;
+		}
+		return "<li><a href=\"#\">No students conneceted</a></li>\n";
+	}
 
 }
+		/*<li><a href="#">User</a></li>*/

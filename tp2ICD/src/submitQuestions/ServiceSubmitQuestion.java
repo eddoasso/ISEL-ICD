@@ -45,6 +45,7 @@ public class ServiceSubmitQuestion extends HttpServlet {
 			System.out.println("sucesso");
 			String key = (String) session.getAttribute("studentKey");
 			String studentNumber= (String) session.getAttribute("studentNumber");
+			session.setAttribute("profOnline", ServerData.checkProfIsOnline(key));
 			ServerData.stopExistingTimers(key);
 			if(session.getAttribute("existingQuest") != null)
 				session.setAttribute("existingQuest",null);

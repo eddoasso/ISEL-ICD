@@ -39,7 +39,9 @@ public class DocumentXML {
 			factory = DocumentBuilderFactory.newInstance();
 			builder = factory.newDocumentBuilder();
 			document = builder.parse(Path.pathXML+"dados.xml");
-			if (ValidatorXML.validDoc(document, Path.pathXML + "dados.xsd", XMLConstants.W3C_XML_SCHEMA_NS_URI))
+			Document doc = builder.parse(Path.pathXML+"users.xml");
+			if (ValidatorXML.validDoc(document, Path.pathXML + "dados.xsd", XMLConstants.W3C_XML_SCHEMA_NS_URI) 
+					&& ValidatorXML.validDoc(doc, Path.pathXML + "users.xsd", XMLConstants.W3C_XML_SCHEMA_NS_URI))
 				System.out.println("Validação do XML feita com sucesso");// Validação com XSD realizada com sucesso!
 			else
 				System.out.println("O documento XML não é válido para o documento XSD");// Falhou a validação com XSD

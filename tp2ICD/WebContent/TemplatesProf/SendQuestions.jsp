@@ -57,6 +57,7 @@
 				<ul>
 					<li class="active"><a href="handleEditProfInfo" style="font-size:18px;"><%= session.getAttribute("username") %></a></li>
 					<li><a href="handleProfCheckAnswers" style="font-size:18px;">Check Answers</a></li>
+					<li><a href="handleLogoutProf" style="font-size:18px;">Logout</a></li>
 				</ul>
 			</nav>
 		</div>

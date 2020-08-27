@@ -35,7 +35,7 @@ public class LoginFormGestor extends HttpServlet {
 			try {
 				for (;;) {
 					Thread.sleep(100);
-					if (ServerData.getProfByName(user).getResponseReceived() != null) {
+					if (ServerData.getProfByName(user).getResponseReceived() != null ) {
 						if (ServerData.getProfByName(user).getResponseReceived().equals("correto")) {
 							ServerData.getProfByName(user).resetResponseReceived();
 							session.setAttribute("username", user);

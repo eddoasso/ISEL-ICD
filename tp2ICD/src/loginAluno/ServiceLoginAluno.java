@@ -46,6 +46,7 @@ public class ServiceLoginAluno extends HttpServlet {
 				if(session.getAttribute("submitError") != null)
 					session.setAttribute("submitError",null);
 				session.setAttribute("infoStudent", createMessageToShowQuestion((String) session.getAttribute("studentKey"),number));
+				session.setAttribute("profOnline", ServerData.checkProfIsOnline((String) session.getAttribute("studentKey")));
 				if(session.getAttribute("infoStudent") != null) {
 					ServerData.countTimeToExecute(ServerData.getTimeToAnswerQuestion((String) session.getAttribute("studentKey"), number),number);
 					session.setAttribute("countTime", ServiceSubmitQuestion.createScriptTimer());
@@ -177,7 +178,7 @@ public class ServiceLoginAluno extends HttpServlet {
 
 	private boolean createNewClientStudent(String firstName, String lastname, String studentNumber, String birthday,
 			String key) {
-		ClientServerAluno student = new ClientServerAluno(firstName, lastname, studentNumber, birthday);
+		ClientServerAluno student = new ClientServerAluno(firstName, lastname, studentNumber, birthday,System.currentTimeMillis());
 		if (ServerData.storeStudentWithKey(student, key)) {
 			return true;
 		}

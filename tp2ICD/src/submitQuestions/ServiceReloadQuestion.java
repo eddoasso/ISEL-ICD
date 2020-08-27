@@ -36,9 +36,9 @@ public class ServiceReloadQuestion extends HttpServlet {
 			session.setAttribute("existingQuest", "");
 			getServletContext().getRequestDispatcher("/TemplatesAluno/WaitingRoom.jsp").forward(request, response);
 		} else if(question == null || question.equals("")) {//esta certo para dar reload
-			System.out.println("sucesso reload");
 			String key = (String) session.getAttribute("studentKey");
 			String studentNumber= (String) session.getAttribute("studentNumber");
+			session.setAttribute("profOnline", ServerData.checkProfIsOnline(key));
 			ServerData.stopExistingTimers(key);
 			session.setAttribute("infoStudent", ServiceLoginAluno.createMessageToShowQuestion(key,studentNumber));
 			

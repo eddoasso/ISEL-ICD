@@ -26,7 +26,19 @@
    <string>123456</string>
   </void>
   <void method="add">
+   <string>deus2</string>
+  </void>
+  <void method="add">
+   <string>123456</string>
+  </void>
+  <void method="add">
    <string>deus</string>
+  </void>
+  <void method="add">
+   <string>123456</string>
+  </void>
+  <void method="add">
+   <string>deus3</string>
   </void>
   <void method="add">
    <string>123456</string>

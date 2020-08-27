@@ -7,14 +7,15 @@ public class ClientServerAluno {
 	private String lastName;
 	private String number;
 	private String birthdayDate;
-	
+	private long timeConnect;
 
 
-	public ClientServerAluno(String firstName,String lastName, String number, String birthdayDate) {
+	public ClientServerAluno(String firstName,String lastName, String number, String birthdayDate, long timeConnect) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.number = number;
 		this.birthdayDate = birthdayDate;
+		this.timeConnect = timeConnect;
 		questionIndex = 0;
 	}
 	
@@ -46,4 +47,11 @@ public class ClientServerAluno {
 		this.questionIndex = index;
 	}
 	
+	public long getTimeConnectMillis() {
+		return this.timeConnect;
+	}
+	
+	public long getTimeConnectMinuts() {
+		return ((System.currentTimeMillis() - getTimeConnectMillis())/1000)/60;
+	}	
 }

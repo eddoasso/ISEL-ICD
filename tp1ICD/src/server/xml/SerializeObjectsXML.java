@@ -112,7 +112,7 @@ public class SerializeObjectsXML {
 		}
 		
 		String newPass = doc.getElementsByTagName("new").item(0).getTextContent();
-		if(addUserWithoutCheck(user,newPass)) {
+		if(addUserWithoutCheck(user,newPass) && ValidatorXML.validateChangePass(xmlStr)) {
 			return "<resultpass>sucesso</resultpass>";
 		}
 

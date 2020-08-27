@@ -12,6 +12,7 @@ import javax.servlet.ServletContextListener;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
+import answersCorrection.ValidateXmlWithXSD;
 import loginAluno.ClientServerAluno;
 import loginProf.ClientServerProf;
 import xmlWriter.XMLReadWrite;
@@ -540,11 +541,15 @@ public class ServerData implements ServletContextListener {
 						e.printStackTrace();
 					}
 				}
-				String result = XMLReadWrite.documentFromString(received).getElementsByTagName("resultpass").item(0).getTextContent();
-				if(result.equals("sucesso"))
-					return "Sucess changing the password";
-				else
-					return "Failure changing the password";
+				if(ValidateXmlWithXSD.validateChangePass(received)) {
+					String result = XMLReadWrite.documentFromString(received).getElementsByTagName("resultpass").item(0).getTextContent();
+					if(result.equals("sucesso"))
+						return "Sucess changing the password";
+					else
+						return "Failure changing the password";
+				}else {
+					System.out.println("Not validated XML change pass");
+				}
 				
 			}
 		}
@@ -577,6 +582,50 @@ public class ServerData implements ServletContextListener {
 		return result;
 	}
 	
+	public static long[] getAllStudentsMinutsConnected(String key) {
+		if(studentsConnectedByRoom.get(key) != null) {
+			ArrayList<ClientServerAluno> students = studentsConnectedByRoom.get(key);
+			
+			long[] timeConnected = new long[students.size()];
+			
+			for(int i = 0; i<timeConnected.length;i++) {
+				timeConnected[i] = students.get(i).getTimeConnectMinuts();
+			}
+			return timeConnected;
+		}
+		return null;
+	}
 	
+	public static void logoutProf(String profName,String key) {
+		int index = getIndexProfByName(profName);
+		
+		profsConnected.remove(index);
+		
+		for(int i = 0; i<roomsCreated.size();i++) {
+			if(roomsCreated.get(i).equals(key)) {
+				roomsCreated.remove(i);
+				break;
+			}
+		}
+		profsConnectedByRoom.remove(key);
+	}
+	
+	public static void logoutStudent(String studentNumber, String key) {
+		ArrayList<ClientServerAluno> students = studentsConnectedByRoom.get(key);
+		
+		for(int i = 0; i<students.size();i++) {
+			if(students.get(i).getStudentNumber().equals(studentNumber)) {
+				students.remove(i);
+			}
+		}
+		studentsConnectedByRoom.put(key, students);
+	}
+	
+	public static String checkProfIsOnline(String key) {
+		if(profsConnectedByRoom.get(key) != null) {
+			return "connected";
+		}
+		return null;
+	}
 	
 }

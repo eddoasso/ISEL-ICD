@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import answersCorrection.ValidateXmlWithXSD;
 import loginProf.xmlMessageConvert.MessagesConverter;
 import xmlWriter.XMLReadWrite;
 
@@ -62,7 +63,7 @@ public class RegisterProf extends HttpServlet {
 	private String convertMsnToOutput(String xml) {
 		String result = XMLReadWrite.documentFromString(xml).getElementsByTagName("newprof").item(0).getTextContent();
 		
-		if(result.equals("sucesso")) {
+		if(result.equals("sucesso") && ValidateXmlWithXSD.validateNewProf(xml)) {
 			return "Success register your account";
 		}
 		return "Failure register your account";

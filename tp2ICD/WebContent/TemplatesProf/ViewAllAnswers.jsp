@@ -8,6 +8,7 @@
 <title>UnioN</title>
 <link rel="stylesheet" type="text/css" href="css/main.css" />
 <link rel="stylesheet" type="text/css" href="css/styleIndex.css" />
+<link rel="stylesheet" type="text/css" href="css/dropDown.css" />
 
 <!-- Favicons -->
 <link href="images/icons/favicon.png" rel="icon" />
@@ -52,6 +53,13 @@
 			</div>
 			<nav class="nav-menu d-none d-lg-block" style="float: right;">
 				<ul>
+				<li class="drop-down log" style="font-size: 18px;"><a href="">Students connected</a>
+						<ul>
+							<% if (session.getAttribute("minConnect") != null) {%>
+							<%pageContext.getOut().write("" + (session.getAttribute("minConnect")));%>
+							<%}%>
+						</ul>
+					</li>
 					<li><a href="handleReturnQuestProf" style="font-size: 18px;">Return to send questions</a></li>
 				</ul>
 			</nav>
