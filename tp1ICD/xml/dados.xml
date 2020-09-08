@@ -80,18 +80,27 @@
         <pergunta id="ID_9">
             <questao>Em Java tudo e um objeto?</questao>
             <tempo>00:01:00</tempo>
-            <multimedia />
+            <multimedia/>
             <opcao resposta="certo">Sim</opcao>
             <opcao resposta="errado">Nao</opcao>
         </pergunta>
         <pergunta id="ID_10">
             <questao>Selecione os tipos primitivos</questao>
             <tempo>00:01:00</tempo>
-            <multimedia />
+            <multimedia/>
             <opcao resposta="certo">int</opcao>
             <opcao resposta="errado">Object</opcao>
             <opcao resposta="errado">String</opcao>
             <opcao resposta="certo">boolean</opcao>
         </pergunta>
     </categoria>
+<categoria tema="XMLS">
+<pergunta id="ID_11">
+<questao>ddddddd</questao>
+<tempo>00:00:30</tempo>
+<multimedia/>
+<opcao resposta="certo">sdfsdfs</opcao>
+<opcao resposta="errado">sdfsdfsdf</opcao>
+</pergunta>
+</categoria>
 </categorias>

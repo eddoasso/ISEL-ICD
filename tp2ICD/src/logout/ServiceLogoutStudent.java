@@ -27,7 +27,7 @@ public class ServiceLogoutStudent extends HttpServlet {
 		ServerData.logoutStudent((String)session.getAttribute("studentNumber"),(String)session.getAttribute("studentKey"));
 		session.setAttribute("studentNumber", null);
 		session.setAttribute("studentKey", null);
-		response.sendRedirect("index.html");
+		response.sendRedirect("index.jsp");
 		
 	}
 

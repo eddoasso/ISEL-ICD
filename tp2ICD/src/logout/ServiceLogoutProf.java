@@ -27,7 +27,7 @@ public class ServiceLogoutProf extends HttpServlet {
 		ServerData.logoutProf((String)session.getAttribute("username"),(String)session.getAttribute("key"));
 		session.setAttribute("username", null);
 		session.setAttribute("key", null);
-		response.sendRedirect("index.html");
+		response.sendRedirect("index.jsp");
 		
 	}
 

@@ -35,8 +35,10 @@
 	rel="stylesheet">
 <link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet">
 
+<script>var contextPath = "${pageContext.request.contextPath}";</script>
 
 <script src="scripts/main.js"></script>
+<script src="scripts/ajaxRequest.js"></script>
 
 </head>
 
@@ -101,6 +103,6 @@
 
 	<script src="scripts/editChoose.js"></script>
 
-	
 
+<jsp:include page="../JSPIncludes/asyncAnswers.jsp"/>
 </html>

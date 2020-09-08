@@ -1,8 +1,13 @@
 package serverData;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -15,6 +20,7 @@ import org.w3c.dom.NodeList;
 import answersCorrection.ValidateXmlWithXSD;
 import loginAluno.ClientServerAluno;
 import loginProf.ClientServerProf;
+import otherServerInfo.ServerInfo;
 import xmlWriter.XMLReadWrite;
 
 public class ServerData implements ServletContextListener {
@@ -319,13 +325,14 @@ public class ServerData implements ServletContextListener {
 			ArrayList<String> responses = questionsAnsweredStudents.get(number);
 			responses.add(xmlResponseAnswers);
 			questionsAnsweredStudents.put(number,responses);
-			System.out.println(questionsAnsweredStudents);
+			writeToFile("aquii");//TODO
+			
 		}
 		else {
 			ArrayList<String> responses = new ArrayList<String>();
 			responses.add(xmlResponseAnswers);
 			questionsAnsweredStudents.put(number,responses);
-			System.out.println(questionsAnsweredStudents);
+			writeToFile("aquii");//TODO
 		}
 	}
 	
@@ -626,6 +633,34 @@ public class ServerData implements ServletContextListener {
 			return "connected";
 		}
 		return null;
+	}
+	
+	
+	public static void writeToFile(String value) {
+		try {
+			FileWriter myWriter = new FileWriter(ServerInfo.pathToFileAnswers);
+			myWriter.write(value);
+			myWriter.close();
+			System.out.println("Successfully wrote to the file.");
+		} catch (IOException e) {
+			System.out.println("An error occurred.");
+			e.printStackTrace();
+		}
+	}
+	
+	public static void readFromFile() {
+		try {
+		      File myObj = new File(ServerInfo.pathToFileAnswers);
+		      Scanner myReader = new Scanner(myObj);
+		      while (myReader.hasNextLine()) {
+		        String data = myReader.nextLine();
+		        System.out.println(data);
+		      }
+		      myReader.close();
+		    } catch (FileNotFoundException e) {
+		      System.out.println("An error occurred.");
+		      e.printStackTrace();
+		    }
 	}
 	
 }

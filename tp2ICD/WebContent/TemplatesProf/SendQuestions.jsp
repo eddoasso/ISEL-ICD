@@ -127,7 +127,7 @@
 					
 						<div>
 							<label for="lab1"
-								style="font-family: Poppins-Medium; color: #fff; font-size: 24px;">Opcions</label>
+								style="font-family: Poppins-Medium; color: #fff; font-size: 24px;">Options</label>
 							<label for="check1"
 								style="font-family: Poppins-Medium; color: #fff; font-size: 24px; margin-left: 81%">Answers</label>
 						</div>
@@ -140,7 +140,7 @@
 							<div class="wrap-input100 validate-input"
 								data-validate="Enter password" style="width: 80%;">
 								<input id="op1" name="op1" class="input100" type="text"
-									placeholder="Opcion 1" style="padding: 0px; margin-top: 20px;"
+									placeholder="Option 1" style="padding: 0px; margin-top: 20px;"
 									disabled />
 							</div>
 							<input type="checkbox" id="op-a" name="op-a" value="a" style="margin-left: 10%;" disabled>
@@ -152,7 +152,7 @@
 							<div class="wrap-input100 validate-input"
 								data-validate="Enter password" style="width: 80%;">
 								<input id="op2" name="op2" class="input100" type="text"
-									placeholder="Opcion 2" style="padding: 0px; margin-top: 20px;"
+									placeholder="Option 2" style="padding: 0px; margin-top: 20px;"
 									disabled />
 							</div>
 							<input type="checkbox" id="op-b" name="op-b" value="a"
@@ -167,7 +167,7 @@
 							<div class="wrap-input100 validate-input"
 								data-validate="Enter password" style="width: 80%;">
 								<input id="op3" name="op3" class="input100" type="text"
-									placeholder="Opcion 3" style="padding: 0px; margin-top: 20px;"
+									placeholder="Option 3" style="padding: 0px; margin-top: 20px;"
 									disabled />
 							</div>
 							<input type="checkbox" id="op-c" name="op-c" value="a"
@@ -180,7 +180,7 @@
 							<div class="wrap-input100 validate-input"
 								data-validate="Enter password" style="width: 80%;">
 								<input id="op4" name="op4" class="input100" type="text"
-									placeholder="Opcion 4" style="padding: 0px; margin-top: 20px;"
+									placeholder="Option 4" style="padding: 0px; margin-top: 20px;"
 									disabled />
 							</div>
 							<input type="checkbox" id="op-d" name="op-d" value="a"
@@ -193,7 +193,7 @@
 							<div class="wrap-input100 validate-input"
 								data-validate="Enter password" style="width: 80%;">
 								<input id="op5" name="op5" class="input100" type="text"
-									placeholder="Opcion 5" style="padding: 0px; margin-top: 20px;"
+									placeholder="Option 5" style="padding: 0px; margin-top: 20px;"
 									disabled />
 							</div>
 							<input type="checkbox" id="op-e" name="op-e" value="a"
@@ -206,7 +206,7 @@
 							<div class="wrap-input100 validate-input"
 								data-validate="Enter password" style="width: 80%;">
 								<input id="op6" name="op6" class="input100" type="text"
-									placeholder="Opcion 6" style="padding: 0px; margin-top: 20px;"
+									placeholder="Option 6" style="padding: 0px; margin-top: 20px;"
 									disabled />
 							</div>
 							<input type="checkbox" id="op-f" name="op-f" value="a"
