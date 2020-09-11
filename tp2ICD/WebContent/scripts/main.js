@@ -302,6 +302,12 @@ function validateSubmitStudentQuest() {
 		invalid.innerHTML = "You can't submit a question without a question";
 		return false;
 	}
+	
+	if(setNumQuests() == false){
+		invalid.focus();
+		invalid.innerHTML = "You can't submit a question by editing the page";
+		return false;
+	}
 
 	quest.disabled = false;
 	document.getElementById("see-info").href = "handleCheckDataStudent";
@@ -668,4 +674,31 @@ function isDateFormat(dateString) {
 	let result = day > 0 && day <= monthLength[month - 1];
 	return result;
 }
+
+function setNumQuests(){
+	if(numQuest == 2){
+		if(document.getElementById("op-c").checked || document.getElementById("op-d").checked ||
+				document.getElementById("op-e").checked || document.getElementById("op-f").checked){
+			return false;
+		}
+	}
+	if(numQuest == 3){
+		if(document.getElementById("op-d").checked ||
+				document.getElementById("op-e").checked || document.getElementById("op-f").checked){
+			return false;
+		}
+	}
+	if(numQuest == 4){
+		if(document.getElementById("op-e").checked || document.getElementById("op-f").checked){
+			return false;
+		}
+	}
+	if(numQuest == 5){
+		if(document.getElementById("op-f").checked){
+			return false;
+		}
+	}
+}
+
+
 

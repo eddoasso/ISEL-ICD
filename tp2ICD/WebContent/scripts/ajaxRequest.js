@@ -1,41 +1,54 @@
-//Creating a new XMLHttpRequest object
-var xmlhttp;
 
-if (window.XMLHttpRequest) {
-	xmlhttp = new XMLHttpRequest(); //for IE7+, Firefox, Chrome, Opera, Safari
-} else {
-	xmlhttp = new ActiveXObject("Microsoft.XMLHTTP"); //for IE6, IE5
+function showAllAnswersAjax(){
+	setInterval(function() {
+		$.get("servletAjax", function(responseText) {   // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
+		document.getElementById("w3review").value = responseText;
+    	});
+	}, 3000);
 }
 
-//xmlhttp.open("GET", "handleAsyncAnswers", true);
-xmlhttp.open("GET", contextPath + "/handleAsyncAnswers", true);
+
+function showAllStudentsTime(){
+	setInterval(function() {
+		$.get("servletAjaxStudentsCon", function(responseText) {
+			let mainElem = document.getElementById("stn");
+			let childElem = document.getElementById("stnx");
+			let docNodes = document.createRange().createContextualFragment(responseText);
+			mainElem.replaceChild(docNodes, childElem);
+    	});
+	}, 3000);
+}
 
 
-console.log(contextPath);
-console.log(contextPath + "/handleAsyncAnswers");
-console.log($("html").data("contextPath") + "/handleAsyncAnswers");
+function showCountAnswers(){
+	setInterval(function() {
+		$.get("servletAjaxCountAnswers", function(responseText) {
+			let mainElem = document.getElementById("counter");
+			mainElem.innerHTML = responseText;
+			
+    	});
+	}, 3000);
+}
 
-//Tell the server that this call is made for ajax purposes.
-xmlhttp.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-xmlhttp.setRequestHeader('X-Test', 'some-value');
+function showOnProf(){
+	setInterval(function() {
+		$.get("servletShowOnProf", function(responseText) {
+			let mainElem = document.getElementById("prof-sel");
+			let childElem = document.getElementById("prof-connect");
+			let docNodes = document.createRange().createContextualFragment(responseText);
+			mainElem.replaceChild(docNodes, childElem);
+			
+    	});
+	}, 3000);
+}
 
-xmlhttp.send(null); //HTTP GET
+function showPendentQuest(){
+	setInterval(function() {
+		$.get("servletPendentQuest", function(responseText) {
+			let mainElem = document.getElementById("counter");
+			mainElem.innerHTML = responseText;
+			
+    	});
+	}, 3000);
+}
 
-//xmlhttp.send( '{"id":"23423"}' ); //HTTP POST
-
-xmlhttp.onreadystatechange = function() {
-	if (xmlhttp.readyState == 4) {
-		if (xmlhttp.status == 200) {
-			console.log("sucess");
-			//request succeed
-		} else {
-			console.log("insucesso");
-			//request failed
-		}
-	}
-};
-
-setInterval(function() {
-	console.log("ajax");
-
-}, 3000);

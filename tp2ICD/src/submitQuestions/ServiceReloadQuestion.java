@@ -45,6 +45,7 @@ public class ServiceReloadQuestion extends HttpServlet {
 			if((String)session.getAttribute("infoStudent") != null) {
 				session.setAttribute("countTime", ServiceSubmitQuestion.createScriptTimer());
 				ServerData.countTimeToExecute(ServerData.getTimeToAnswerQuestion(key, studentNumber),studentNumber);
+				session.setAttribute("numQuestionsAnswer", ServiceLoginAluno.createNumQuestion(key, studentNumber));
 			}
 			else
 				session.setAttribute("countTime", null);

@@ -39,16 +39,17 @@ public class ServiceProfCheckAnswers extends HttpServlet {
 
 	}
 	
-	private String convertTimeMinToHTML(long[] timeConnected, String key) {
+	public static String convertTimeMinToHTML(long[] timeConnected, String key) {
 		if(timeConnected != null) {
-			String html = "";
+			String html = "<ul id=\"stnx\">";
 			String[] studentNumbers =  ServerData.getStudentsConnected(key);
 			for(int i = 0; i < timeConnected.length;i++) {
-				html+= "<li><a href=\"#\">"+studentNumbers[i]+" connetected "+timeConnected[i]+"min</a></li>\n";
+				html+= "<li><a id=\"stnx"+i+"\" href=\"#\">"+studentNumbers[i]+" connetected "+timeConnected[i]+"min</a></li>\n";
 			}
+			html+= "</ul>";
 			return html;
 		}
-		return "<li><a href=\"#\">No students conneceted</a></li>\n";
+		return "<ul id=\"stnx\"><li><a id=\"stnx0\" href=\"#\">No students conneceted</a></li>\n</ul>";
 	}
 
 }

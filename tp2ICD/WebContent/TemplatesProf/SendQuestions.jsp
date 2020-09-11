@@ -39,6 +39,7 @@
 <script src="scripts/comboBox/listBox.js"></script>
 <script src="scripts/comboBox/listOpcions.js"></script>
 <script src="scripts/main.js"></script>
+<script src="scripts/ajaxRequest.js"></script>
 
 </head>
 
@@ -100,7 +101,7 @@
 							<input id="cb1-input" name="cb1-input" class="cb_edit" type="text" role="combobox"
 								aria-autocomplete="list" aria-expanded="false"
 								aria-controls="cb1-listbox"
-								style="border-radius: 10px; padding: 10px; height: 45px; width: 310px; font-size: 17px; background-color: #E0E0E0; color: #383838">
+								style="border-radius: 10px; padding: 10px; height: 45px; width: 310px; font-size: 17px; background-color: #E0E0E0; color: #383838" autocomplete="off">
 							<button id="cb1-button" tabindex="-1" aria-label="Open"
 								type="button" class="btn-drop"
 								style="border-radius: 10px; position: absolute; top: 0; left: 409px; border: 0px solid transparent; background-color: #E0E0E0; font-size: 20px; width: 40px; height: 45px;">V</button>
@@ -237,6 +238,8 @@
 								Submit</button>
 						</div>
 					</div>
+					<p id="counter" class="invalid"
+						style="font-size: 20px; color: #63C5DA; padding-top: 20px;text-align: center;" >YOOOOOO</p>
 					<p id="invalid" class="invalid"
 						style="font-size: 16px; color: #e5e5e5; padding-top: 15px" />
 					<div class="text-center p-t-90" style="padding-top:30px;">
@@ -268,6 +271,7 @@
 		resetAll();
 	</script>
 	<% pageContext.getOut().write("" +(session.getAttribute("infoQuest")));%>
+	<script>showCountAnswers();</script>
 
 </body>
 

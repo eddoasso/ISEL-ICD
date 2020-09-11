@@ -1,1 +1,6 @@
-aquii
+----------------Stundent Number 3444-------------------------
+The question 1 (Nome do XML.), you answered 1 (Extensible Markup Language), 2 (Extension Markting Localy). The answer 1 is correct, 2 is not correct.
+
+The question 2 (Utilização do XML), you answered 3 (Facilitar a comunicação através de marcas de texto). The answer 3 is correct.
+
+

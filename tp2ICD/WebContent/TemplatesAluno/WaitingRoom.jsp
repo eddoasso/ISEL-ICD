@@ -35,6 +35,7 @@
 
 
 <script src="scripts/main.js"></script>
+<script src="scripts/ajaxRequest.js"></script>
 
 </head>
 
@@ -50,12 +51,12 @@
 					class="img-fluid" style="max-height: 50px; border-radius: 6px;"></a>
 			</div>
 			<nav class="nav-menu d-none d-lg-block" style="float: right;">
-				<ul>
+				<ul id="prof-sel">
 					<li class="active"><a id="see-info" href="handleCheckDataStudent" style="font-size:18px;">Student <%= session.getAttribute("studentNumber") %></a></li>
 					<% if(session.getAttribute("profOnline") != null){%>
-						<li><a id="see-correction" href="#" style="font-size:18px;color:#03C04A">Teacher online</a></li>
+						<li id="prof-connect"><a id="see-correction" href="#" style="font-size:18px;color:#03C04A">Teacher online</a></li>
 					<% }else {%>
-						<li><a id="see-correction" href="#" style="font-size:18px;color:#ff6666">Teacher offline</a></li>
+						<li id="prof-connect"><a id="see-correction" href="#" style="font-size:18px;color:#ff6666">Teacher offline</a></li>
 					<% }%>
 					<li><a id="see-correction" href="handleShowCorrection" style="font-size:18px;">Check Answers</a></li>
 					<li><a href="handleLogoutStudent" style="font-size:18px;">Logout</a></li>
@@ -227,6 +228,8 @@
 								Submit</button>
 						</div>
 					</div>
+					<p id="counter" class="invalid"
+						style="font-size: 20px; color: #63C5DA; padding-top: 20px;text-align: center;"></p>
 					<p id="invalid" class="invalid"
 						style="font-size: 16px; color: #e5e5e5; padding-top: 15px" />
 					<div class="text-center p-t-90">
@@ -258,6 +261,12 @@
 	<% if(session.getAttribute("countTime") != null){%>
 		<% pageContext.getOut().write("" +(session.getAttribute("countTime")));%>
 	<% }%>
+	
+	<% if(session.getAttribute("numQuestionsAnswer") != null){%>
+		<% pageContext.getOut().write("<script>let numQuest =" +(session.getAttribute("numQuestionsAnswer"))+";</script>");%>
+	<% }%>
+	
+	<script>showOnProf();showPendentQuest();</script>
 	
 </body>
 

@@ -55,12 +55,10 @@
 			</div>
 			<nav class="nav-menu d-none d-lg-block" style="float: right;">
 				<ul>
-				<li class="drop-down log" style="font-size: 18px;"><a href="">Students connected</a>
-						<ul>
-							<% if (session.getAttribute("minConnect") != null) {%>
-							<%pageContext.getOut().write("" + (session.getAttribute("minConnect")));%>
-							<%}%>
-						</ul>
+				<li id="stn" class="drop-down log" style="font-size: 18px;"><a href="">Students connected</a>
+						<% if (session.getAttribute("minConnect") != null) {%>
+						<%pageContext.getOut().write("" + (session.getAttribute("minConnect")));%>
+						<%}%>
 					</li>
 					<li><a href="handleReturnQuestProf" style="font-size: 18px;">Return to send questions</a></li>
 				</ul>
@@ -102,7 +100,7 @@
 	</footer>
 
 	<script src="scripts/editChoose.js"></script>
-
+	<script>showAllAnswersAjax();showAllStudentsTime();</script>
 
 <jsp:include page="../JSPIncludes/asyncAnswers.jsp"/>
 </html>

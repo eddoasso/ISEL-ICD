@@ -42,7 +42,6 @@ public class ServiceSubmitQuestion extends HttpServlet {
 			getServletContext().getRequestDispatcher("/TemplatesAluno/TemplateLoginAluno.jsp").forward(request,
 					response);
 		} else if(validateExistingQuestion(question,(String) session.getAttribute("studentKey"),(String)session.getAttribute("studentNumber"))){
-			System.out.println("sucesso");
 			String key = (String) session.getAttribute("studentKey");
 			String studentNumber= (String) session.getAttribute("studentNumber");
 			session.setAttribute("profOnline", ServerData.checkProfIsOnline(key));
@@ -51,9 +50,14 @@ public class ServiceSubmitQuestion extends HttpServlet {
 				session.setAttribute("existingQuest",null);
 			if(session.getAttribute("submitError") != null)
 				session.setAttribute("submitError",null);
-			if (!ServerData.passedTheTime(studentNumber)) 
-				ServerData.setAnswerByStudent(createXMLWithAnswers(corrections, key, studentNumber), key,
+			if (!ServerData.passedTheTime(studentNumber)) {
+				String[] removedNonOpcions = new String[Integer.parseInt((String) session.getAttribute("numQuestionsAnswer"))];//
+				for(int i = 0; i < removedNonOpcions.length;i++) {
+					removedNonOpcions[i] = corrections[i];
+				}
+				ServerData.setAnswerByStudent(createXMLWithAnswers(removedNonOpcions, key, studentNumber), key,
 						studentNumber);
+			}
 			else
 				ServerData.setAnswerByStudent(createXMLWithAnswers(empty, key, studentNumber), key, studentNumber);
 			ServerData.increaseIndexQuestion(key,studentNumber);
@@ -68,7 +72,6 @@ public class ServiceSubmitQuestion extends HttpServlet {
 			
 			getServletContext().getRequestDispatcher("/TemplatesAluno/WaitingRoom.jsp").forward(request, response);
 		} else {
-			System.out.println("insucesso");
 			session.setAttribute("submitError", "");
 			getServletContext().getRequestDispatcher("/TemplatesAluno/WaitingRoom.jsp").forward(request, response);
 		}

@@ -72,7 +72,7 @@ public class ClientServerProf {
 			public void run() {
 				for (;;) {
 					try {
-						Thread.sleep(50);
+						Thread.sleep(30);
 						if (xmlProtocol != "") {
 							out.println(xmlProtocol);
 							xmlProtocol = "";

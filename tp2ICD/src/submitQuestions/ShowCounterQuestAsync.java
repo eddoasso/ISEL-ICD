@@ -1,9 +1,8 @@
-package answersCorrection;
+package submitQuestions;
 
 import java.io.IOException;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,8 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import serverData.ServerData;
 
-@WebServlet("/someServlet")
-public class WriteAnswersAsync extends HttpServlet {
+public class ShowCounterQuestAsync extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -32,7 +30,7 @@ public class WriteAnswersAsync extends HttpServlet {
 		}
 
 		
-		String text = ServerData.getAllStudentsAnswers((String) session.getAttribute("key"));
+		String text = "Students answered "+ServerData.getCountStudentsAnswers((String) session.getAttribute("key"))+" questions until now";
 		
 	    response.setContentType("text/plain");  // Set content type of the response so that jQuery knows what it can expect.
 	    response.setCharacterEncoding("UTF-8"); // You want world domination, huh?

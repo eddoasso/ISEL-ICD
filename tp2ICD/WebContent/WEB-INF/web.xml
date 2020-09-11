@@ -14,4 +14,44 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <servlet-name>ServletX</servlet-name>
+    <servlet-class>answersCorrection.WriteAnswersAsync</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>ServletX</servlet-name>
+    <url-pattern>/servletAjax</url-pattern>
+</servlet-mapping>
+<servlet>
+    <servlet-name>ServletZ</servlet-name>
+    <servlet-class>answersCorrection.WriteStudentsConnected</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>ServletZ</servlet-name>
+    <url-pattern>/servletAjaxStudentsCon</url-pattern>
+</servlet-mapping>
+<servlet>
+    <servlet-name>ServletY</servlet-name>
+    <servlet-class>submitQuestions.ShowCounterQuestAsync</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>ServletY</servlet-name>
+    <url-pattern>/servletAjaxCountAnswers</url-pattern>
+</servlet-mapping>
+<servlet>
+    <servlet-name>ServletR</servlet-name>
+    <servlet-class>loginProf.ProfOnlineAsync</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>ServletR</servlet-name>
+    <url-pattern>/servletShowOnProf</url-pattern>
+</servlet-mapping>
+<servlet>
+    <servlet-name>ServletI</servlet-name>
+    <servlet-class>submitQuestions.ShowStudentsAnswersWaiting</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>ServletI</servlet-name>
+    <url-pattern>/servletPendentQuest</url-pattern>
+</servlet-mapping>
 </web-app>

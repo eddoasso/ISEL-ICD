@@ -56,6 +56,7 @@ public class ServiceLoginAluno extends HttpServlet {
 				if(session.getAttribute("infoStudent") != null) {
 					ServerData.countTimeToExecute(ServerData.getTimeToAnswerQuestion((String) session.getAttribute("studentKey"), number),number);
 					session.setAttribute("countTime", ServiceSubmitQuestion.createScriptTimer());
+					session.setAttribute("numQuestionsAnswer", createNumQuestion((String) session.getAttribute("studentKey"), number));
 				}
 				else
 					session.setAttribute("countTime", null);
@@ -239,4 +240,23 @@ public class ServiceLoginAluno extends HttpServlet {
 		}
 		return null;
 	}
+	
+	// retorna string de script a chamar função js para mostrar resultados
+		public static String createNumQuestion(String key, String studentNumber) {
+			String data = ServerData.getQuestionByStudentNumber(key, studentNumber);
+			if (data != null && !data.equals("")) {
+				Document doc = XMLReadWrite.documentFromString(data);
+
+				if (doc != null) {
+					NodeList listAns = doc.getElementsByTagName("answer");
+					
+					int sizeAnswers = listAns.getLength();
+					
+					return ""+sizeAnswers;
+
+				}
+				return null;
+			}
+			return null;
+		}
 }

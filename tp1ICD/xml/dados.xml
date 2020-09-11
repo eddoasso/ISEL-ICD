@@ -103,4 +103,13 @@
 <opcao resposta="errado">sdfsdfsdf</opcao>
 </pergunta>
 </categoria>
+<categoria tema="KKKK">
+<pergunta id="ID_12">
+<questao>hkghk</questao>
+<tempo>00:00:22</tempo>
+<multimedia/>
+<opcao resposta="certo">ufhgfhfg</opcao>
+<opcao resposta="errado">hjvvhj</opcao>
+</pergunta>
+</categoria>
 </categorias>

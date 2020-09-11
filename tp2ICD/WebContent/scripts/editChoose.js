@@ -57,6 +57,7 @@ function selectorBasedOnQuestion(info) {
 	for (let i = 1; i < childCount+1; i++) {
 		let elemento = document.getElementById("q" + i);
 		elemento.addEventListener("click", function(e) {
+			resetTextOnOpcions();
 			resetAllCheckedBox();
 			document.getElementById("question-time").value = separatedInfo[i-1][0];
 			switch(separatedInfo[i-1].length-1){
@@ -234,6 +235,12 @@ function resetAllCheckedBox(){
 	document.getElementById("op-d").checked = false;
 	document.getElementById("op-e").checked = false;
 	document.getElementById("op-f").checked = false;
+}
+
+function resetTextOnOpcions(){
+	for(let i = 1; i < 7;i++){
+		document.getElementById("op"+i).value = null;
+	}
 }
 
 
